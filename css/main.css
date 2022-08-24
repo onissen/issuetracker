@@ -1,0 +1,63 @@
+.octicon {
+  font-size: inherit !important;
+}
+
+.text-muted {
+  color: #57606a !important;
+}
+
+.topic-header {
+  background-color: #F6F8FA;
+  padding: 0;
+}
+
+.topic-headline {
+  font-size: 20px;
+  float: left;
+  display: flex;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.topic-headline .octicon {
+  margin-right: 8px;
+}
+.topic-headline a {
+  text-decoration: none;
+}
+.topic-headline .breadcrumb {
+  margin: 0;
+}
+.topic-headline .breadcrumb .breadcrumb-item:last-of-type {
+  font-weight: 600;
+}
+
+.label-muted-outline {
+  color: #57606a;
+  border-color: #d0d7de;
+  border: 1px solid;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.topic-nav {
+  font-size: 14px;
+  min-height: 48px;
+  display: flex;
+  box-shadow: inset 0 -1px 0 #d8dee4;
+}
+.topic-nav ul {
+  align-items: center;
+  display: flex;
+}
+.topic-nav .nav-item {
+  display: inline-flex;
+}
+.topic-nav .nav-link {
+  padding: 0 8px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+/*# sourceMappingURL=main.css.map */
