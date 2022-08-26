@@ -9,6 +9,18 @@ $gh-border-muted: hsla(210, 18%, 87%,1)
 .text-muted
     color: $gh-muted !important
 
+a
+    text-decoration: none
+
+    &:hover
+        text-decoration: underline
+
+svg
+    fill: currentcolor
+
+
+// Topic Header on Detail-Pages
+
 .topic-header
     background-color: $gh-background
     padding: 0
@@ -22,9 +34,6 @@ $gh-border-muted: hsla(210, 18%, 87%,1)
 
     .octicon
         margin-right: 8px
-
-    a
-        text-decoration: none   
 
     .breadcrumb
         margin: 0
@@ -58,3 +67,29 @@ $gh-border-muted: hsla(210, 18%, 87%,1)
         line-height: 30px
         display: flex
         align-items: center
+
+        svg
+            fill: currentcolor
+            margin-right: 8px
+
+// List Topcis Page
+.card
+    border-color: $gh-border-color
+
+.card-topic-header
+    display: flex
+    width: 100%
+    align-items: center
+    position: relative
+
+    a
+        flex: auto
+        font-weight: 600
+        &:hover
+            text-decoration: none
+
+.card-topic-description
+    font-size: 12px
+    margin-top: 16px
+    margin-bottom: 8px
+    color: $gh-muted

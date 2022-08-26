@@ -6,6 +6,17 @@
   color: #57606a !important;
 }
 
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+svg {
+  fill: currentcolor;
+}
+
 .topic-header {
   background-color: #F6F8FA;
   padding: 0;
@@ -20,9 +31,6 @@
 }
 .topic-headline .octicon {
   margin-right: 8px;
-}
-.topic-headline a {
-  text-decoration: none;
 }
 .topic-headline .breadcrumb {
   margin: 0;
@@ -58,6 +66,35 @@
   line-height: 30px;
   display: flex;
   align-items: center;
+}
+.topic-nav .nav-link svg {
+  fill: currentcolor;
+  margin-right: 8px;
+}
+
+.card {
+  border-color: #d0d7de;
+}
+
+.card-topic-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+.card-topic-header a {
+  flex: auto;
+  font-weight: 600;
+}
+.card-topic-header a:hover {
+  text-decoration: none;
+}
+
+.card-topic-description {
+  font-size: 12px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #57606a;
 }
 
 /*# sourceMappingURL=main.css.map */
