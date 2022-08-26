@@ -1,7 +1,14 @@
+body
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    
 $gh-background: #F6F8FA
 $gh-muted: #57606a
 $gh-border-color: #d0d7de
 $gh-border-muted: hsla(210, 18%, 87%,1)
+
+h3
+    font-weight: 600
+    font-size: 20px
 
 .octicon
     font-size: inherit !important
@@ -72,24 +79,4 @@ svg
             fill: currentcolor
             margin-right: 8px
 
-// List Topcis Page
-.card
-    border-color: $gh-border-color
-
-.card-topic-header
-    display: flex
-    width: 100%
-    align-items: center
-    position: relative
-
-    a
-        flex: auto
-        font-weight: 600
-        &:hover
-            text-decoration: none
-
-.card-topic-description
-    font-size: 12px
-    margin-top: 16px
-    margin-bottom: 8px
-    color: $gh-muted
+@import topics

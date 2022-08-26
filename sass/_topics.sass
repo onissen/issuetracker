@@ -1,0 +1,45 @@
+// List Topcis Page
+.card
+    border-color: $gh-border-color
+
+.card-topic-header
+    display: flex
+    width: 100%
+    align-items: center
+    position: relative
+
+    a
+        flex: auto
+        font-weight: 600
+        &:hover
+            text-decoration: none
+
+.card-topic-description
+    font-size: 12px
+    margin-top: 16px
+    margin-bottom: 8px
+    color: $gh-muted
+
+
+.topic-li
+    padding: 24px 0
+    border-bottom: 1px solid $gh-border-muted
+
+    .topic-title
+        display: inline-block
+        margin-bottom: 4px
+
+        h3 
+            .badge
+                margin-left: 4px
+                margin-right: 4px
+            
+            a:hover
+                text-decoration: none
+
+    .topic-description p
+        display: inline-block
+        padding-right: 24px
+        margin-bottom: 8px
+        color: $gh-muted
+        font-size: 14px

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
-    <title>Issue Tracker</title>
+    <title><?php if(isset($siteTitle)){echo $siteTitle.' | ';} ?>Issue Tracker</title>
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/fonts/octicons/octicons.css">
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/css/main.css">
