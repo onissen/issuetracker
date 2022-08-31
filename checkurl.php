@@ -1,11 +1,8 @@
-<!-- TODO: Diese Seite aus Weiterleitungsseite stylen -->
-<h1>Check URL</h1>
+<!-- Powered by Check URL :-) -->
+<!-- TODO: Diese Seite aus Weiterleitungsseite stylen??? -->
 <?php
     $endpoints = explode('/', $_REQUEST['q']);
-    print_r($endpoints);
-    
     $endpoit_lvl = count($endpoints);
-    echo 'Länge $endpoints: '.$endpoit_lvl;
 
     if (isset($endpoit_lvl)) {
         if ($endpoit_lvl <= 1) {
