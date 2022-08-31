@@ -14,7 +14,7 @@
     <h2>Themenübersicht</h2>
 
 
-    <!-- FIXIT: Umbauen auf Listenansicht wie GitHub Repo-List?! -->
+    <!-- FIXME: Umbauen auf Listenansicht wie GitHub Repo-List?! -->
 
     <!-- TODO: Suche nachbauen?! ----->
 
