@@ -1,7 +1,14 @@
-<h1>Issues</h1>
+<?php 
+    $siteTitle = 'Issues | '.$endpoints[0].'/'.$endpoints[1];
+    require 'components/header.php'; 
+?>
+
 <?php
-    $channel = $endpoints[0];
-    $topic = $endpoints[1];
+    $sqltopic = $endpoints[1];
+    $sql = "SELECT * FROM topics NATURAL JOIN channels WHERE topics.topic = $sqltopic";
+    $result = $db->prepare($sql);
+    $result->execute();
+    $info = $result->fetch();
     
-    echo $channel.'//'.$topic
+    print_r($info);
 ?>
