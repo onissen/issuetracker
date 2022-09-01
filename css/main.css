@@ -121,7 +121,8 @@ svg {
 .topic-li .topic-title h3 a:hover {
   text-decoration: none;
 }
-.topic-li .topic-description p {
+
+.topic-description {
   display: inline-block;
   padding-right: 24px;
   margin-bottom: 8px;

@@ -5,10 +5,12 @@
 
 <?php
     $sqltopic = $endpoints[1];
-    $sql = "SELECT * FROM topics NATURAL JOIN channels WHERE topics.topic = $sqltopic";
+    $sql = "SELECT topics.*, channels.* FROM topics NATURAL JOIN channels WHERE topics.topic = '$sqltopic'";
     $result = $db->prepare($sql);
     $result->execute();
     $info = $result->fetch();
     
     print_r($info);
+
+    include 'components/topic-header.php';
 ?>
