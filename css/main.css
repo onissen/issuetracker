@@ -130,4 +130,38 @@ svg {
   font-size: 14px;
 }
 
+.input-group-search-icon {
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  display: block;
+  color: #57606a;
+  text-align: center;
+  pointer-events: none;
+}
+
+.searchbar .querybox {
+  padding: 0;
+}
+.searchbar .search-nav {
+  padding: 0;
+  padding-left: 16px;
+}
+.searchbar .search-nav .btn-group .btn {
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1;
+  padding: 5px 16px;
+}
+.searchbar .search-nav .btn-group .btn svg {
+  margin-right: 2px;
+}
+.searchbar .search-nav .btn-group .btn .badge {
+  margin-left: 3px;
+}
+.searchbar #new-issue {
+  margin-left: 16px;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=main.css.map */
