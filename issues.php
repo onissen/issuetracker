@@ -22,12 +22,16 @@
                         <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
                     </svg>
                 </span>
-                <select name="filter-issues" class="form-select form-select-sm">
-                    <option value="open">Offene Issues</option>
-                    <option value="all">Alle anzeigen</option>
-                    <option value="closed">Erledigte Issues</option>
-                </select>
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?q=issues-all">Alle Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=issues-open">Offene Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=issues-closed">Erledigte Issues</a></li>
+                    <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
+                    <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
+                </ul>
+                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="issues-open:">
             </div>
         </div>
         <div class="col-md-4 search-nav">
@@ -51,3 +55,5 @@
         </div>
     </div>
 </div>
+
+<?php require 'components/footer.php' ?>
