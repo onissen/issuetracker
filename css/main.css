@@ -184,4 +184,42 @@ svg {
   margin-right: 2px;
 }
 
+.issuelist-wrapper {
+  margin: 0 -12px;
+}
+.issuelist-wrapper:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.issuelist-header {
+  font-size: 14px !important;
+  padding: 16px;
+  background-color: #F6F8FA;
+  border: 1px solid #d0d7de;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.states .btn-link {
+  text-decoration: none;
+  color: #24292f;
+}
+.states .btn-link svg {
+  margin-right: 4px;
+}
+.states .btn-link:not(:first-of-type) {
+  margin-left: 10px;
+}
+.states .btn-link.selected {
+  font-weight: 600;
+}
+
+.action-menu {
+  color: #24292f;
+}
+.action-menu .filterbar-item a {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=main.css.map */

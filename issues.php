@@ -24,14 +24,14 @@
                 </span>
                 <button class="btn btn-sm  btn-inputpart dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?q=issues-all">Alle Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=issues-open">Offene Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=issues-closed">Erledigte Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=all">Alle Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=open">Offene Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=closed">Erledigte Issues</a></li>
                     <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="issues-open:">
+                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="open">
             </div>
         </div>
         <div class="col-md-4 search-nav">
@@ -57,6 +57,73 @@
                 </svg>
                 Neuer Issue
             </a>
+        </div>
+    </div>
+
+    <div class="issuelist-wrapper mt-3">
+        <div class="issuelist-header d-flex">
+            <div class="me-3 d-none d-md-block flex-auto">                
+                <input type="checkbox" name="select-all" id="select-all">
+            </div>
+            <div class="listnav row flex-auto w-100">
+                <div class="d-none d-lg-block states col-md-3">
+                    <a href="?q=open" class="btn-link selected">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                            <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
+                        </svg>
+                        X Open
+                    </a>
+                    <a href="?q=closed" class="btn-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                            <path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
+                        </svg>
+                        X Closed
+                    </a>
+                </div>
+                <div class="col-md-9 d-flex no-wrap justify-content-between justify-content-sm-start justify-content-lg-end action-menu">
+                    <div class="filterbar-item" id="author">                       
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Autor</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Foreach Author</a></li>
+                        </ul>
+                    </div>
+                    <div class="filterbar-item" id="label">                       
+                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Label</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Foreach Label</a></li>
+                        </ul>
+                    </div>
+                    <div class="filterbar-item" id="project">                       
+                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekte</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Foreach Project</a></li>
+                        </ul>
+                    </div>
+                    <div class="filterbar-item" id="milestone">                       
+                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
+                        </ul>
+                    </div>
+                    <div class="filterbar-item" id="assignee">                       
+                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verantwortlicher</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Foreach Assignee</a></li>
+                        </ul>
+                    </div>
+                    <div class="filterbar-item" id="sort">                       
+                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sortierung</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Neuste</a></li>
+                            <li><a class="dropdown-item" href="#">Älteste</a></li>
+                            <li><a class="dropdown-item" href="#">Meiste Reaktionen</a></li>
+                            <li><a class="dropdown-item" href="#">Wenigste Reaktionen</a></li>
+                            <li><a class="dropdown-item" href="#">Kürzlich aktualisiert</a></li>
+                            <li><a class="dropdown-item" href="#">Lange nicht aktualisiert</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
