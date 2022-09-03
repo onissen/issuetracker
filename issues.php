@@ -24,14 +24,14 @@
                 </span>
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?q=all">Alle Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=open">Offene Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=closed">Erledigte Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=issues-all">Alle Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=issues-open">Offene Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=issues-closed">Erledigte Issues</a></li>
                     <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm">
+                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="issues-open:">
             </div>
         </div>
         <div class="col-md-4 search-nav">

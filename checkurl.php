@@ -9,7 +9,7 @@
             // Keine Topic gewählt; ggf aber ein Channel
             // FIXME: per meta an index.php weiterleiten
             include 'components/header.php';
-            // echo '<meta http-equiv="refresh" content="0; URL='.$SiteURL.'">';
+            echo '<meta http-equiv="refresh" content="0; URL='.$SiteURL.'">';
         }
 
         elseif ($endpoit_lvl = 2) {

@@ -32,6 +32,7 @@
                         <span class="badge rounded-pill label-muted-outline"><?php echo $topic['visibility'] ?></span>
                     </h3>
                 </div>
+                <div class="clearfix"></div>
                 <div class="topic-description">
                     <p><?php echo $topic['description'] ?></p>
                 </div>
