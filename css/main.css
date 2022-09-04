@@ -2,13 +2,28 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.text-small {
+  font-size: 12px;
+}
+
+.text-open {
+  color: #1a7f37;
+}
+
+.text-closed {
+  color: #8250df;
+}
+
+.link-muted {
+  color: #57606a;
+}
+.link-muted:hover {
+  color: #0a58ca;
+}
+
 h3 {
   font-weight: 600;
   font-size: 20px;
-}
-
-.octicon {
-  font-size: inherit !important;
 }
 
 .text-muted {
@@ -38,8 +53,9 @@ svg {
   line-height: 1;
   margin-bottom: 16px;
 }
-.topic-headline .octicon {
-  margin-right: 8px;
+.topic-headline svg {
+  margin: auto 8px auto 0;
+  color: #57606a;
 }
 .topic-headline .breadcrumb {
   margin: 0;
@@ -200,25 +216,52 @@ svg {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
-
-.states .btn-link {
+.issuelist-header .states .btn-link {
   text-decoration: none;
   color: #24292f;
 }
-.states .btn-link svg {
+.issuelist-header .states .btn-link svg {
   margin-right: 4px;
 }
-.states .btn-link:not(:first-of-type) {
+.issuelist-header .states .btn-link:not(:first-of-type) {
   margin-left: 10px;
 }
-.states .btn-link.selected {
+.issuelist-header .states .btn-link.selected {
   font-weight: 600;
 }
-
-.action-menu {
+.issuelist-header .action-menu {
   color: #24292f;
 }
-.action-menu .filterbar-item a {
+.issuelist-header .action-menu .filterbar-item a {
+  text-decoration: none;
+}
+
+.issuelist-item {
+  border-left: 1px solid #d8dee4;
+  border-right: 1px solid #d8dee4;
+}
+.issuelist-item:not(:first-child) {
+  border-top: 1px solid #d8dee4;
+}
+.issuelist-item:last-child {
+  border-bottom: 1px solid #d8dee4;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.issuelist-item .issuelist-content .issuelist-meta, .issuelist-item .issuelist-content .issuelist-meta a {
+  color: #57606a;
+}
+.issuelist-item .issuelist-content .title-link {
+  font-weight: 600;
+  font-size: 16px;
+  color: #24292f;
+}
+.issuelist-item .issuelist-content .title-link:hover {
+  text-decoration: none;
+  color: #0969da;
+}
+.issuelist-item .issuelist-content .issuelist-meta a:hover {
+  color: #0a58ca;
   text-decoration: none;
 }
 

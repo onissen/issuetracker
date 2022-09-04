@@ -70,25 +70,51 @@
     border-top-left-radius: 6px
     border-top-right-radius: 6px
 
+    .states
+        .btn-link
+            text-decoration: none
+            color: $gh-subnav-color
 
+            svg
+                margin-right: 4px
 
-.states
-    .btn-link
-        text-decoration: none
-        color: $gh-subnav-color
-
-        svg
-            margin-right: 4px
-
-        &:not(:first-of-type)
-            margin-left: 10px
-        
-        &.selected
-            font-weight: 600
-
-.action-menu
-    color: $gh-subnav-color
-    
-    .filterbar-item a
-        text-decoration: none
+            &:not(:first-of-type)
+                margin-left: 10px
             
+            &.selected
+                font-weight: 600
+
+    .action-menu
+        color: $gh-subnav-color
+        
+        .filterbar-item a
+            text-decoration: none
+
+.issuelist-item
+    border-left: 1px solid $gh-border-muted
+    border-right: 1px solid $gh-border-muted
+
+    &:not(:first-child)
+        border-top: 1px solid $gh-border-muted
+    
+    &:last-child
+        border-bottom: 1px solid $gh-border-muted
+        border-bottom-left-radius: 6px
+        border-bottom-right-radius: 6px
+    
+    .issuelist-content
+        .issuelist-meta, .issuelist-meta a
+            color: $gh-muted
+
+        .title-link
+            font-weight: 600
+            font-size: 16px
+            color: $gh-subnav-color
+
+            &:hover
+                text-decoration: none
+                color: #0969da
+        
+        .issuelist-meta a:hover
+            color: #0a58ca
+            text-decoration: none
