@@ -17,12 +17,14 @@
     $sql_averages = "SELECT (SELECT COUNT(issue_id) FROM issues WHERE status = 'open') as issues_open, 
     (SELECT COUNT(issue_id) FROM issues WHERE status = 'closed') as issues_closed";
 
+    $query_averages = $db->prepare($sql_averages);
+    $query_averages->execute();
+    $averages = $query_averages->fetch();
+
     $topicid = $info['tpid'];
-    $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid";
+    $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid ORDER BY issue_id DESC";
     $result_issues = $db->query($sql_issues)->fetchAll();
 
-    global $comment_average;
-    $comment_average = array();
     function CommentsAmmount ($issue, $db) {
         $current_issue = $issue['sql_id'];
         $sql_comment_average = "SELECT COUNT(sql_id) AS average FROM comments WHERE issue_id=$current_issue";
@@ -54,14 +56,14 @@
                 </span>
                 <button class="btn btn-sm  btn-inputpart dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?q=all">Alle Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=open">Offene Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=closed">Erledigte Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=all:">Alle Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=open:">Offene Issues</a></li>
+                    <li><a class="dropdown-item" href="?q=closed:">Erledigte Issues</a></li>
                     <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="open">
+                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="open:">
             </div>
         </div>
         <div class="col-md-4 search-nav">
@@ -97,17 +99,17 @@
             </div>
             <div class="listnav row flex-auto w-100">
                 <div class="d-none d-lg-block states col-md-3">
-                    <a href="?q=open" class="btn-link selected">
+                    <a href="?q=open:" class="btn-link selected">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                             <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
                         </svg>
-                        X Offen
+                        <?php echo $averages['issues_open'].' Offen'; ?>
                     </a>
-                    <a href="?q=closed" class="btn-link">
+                    <a href="?q=closed:" class="btn-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                             <path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
                         </svg>
-                        X Erledigt
+                        <?php echo $averages['issues_closed'].' Erledigt'; ?>
                     </a>
                 </div>
                 <div class="col-md-9 d-flex no-wrap justify-content-between justify-content-sm-start justify-content-lg-end action-menu">
@@ -180,7 +182,13 @@
                     </div>
                     <div class="issuelist-content p-2 pe-3 pe-md-2 w-100">
                         <a class="title-link" href="" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
-                        <span class="text-small issuelist-meta">#<?php echo $issue['issue_id'] ?> {dyndate} eröffnet von <a href="" class="link-muted"><?php echo $issue['author'] ?></a></span>
+                        <span class="text-small issuelist-meta">
+                            <?php if ($issue['status'] == 'closed') { ?>
+                                #<?php echo $issue['issue_id'] ?> von <a href="" class="link-muted"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
+                            <?php } else { ?>
+                                #<?php echo $issue['issue_id'] ?> am <?php echo $issue['date_opened']; ?> eröffnet von <a href="" class="link-muted"><?php echo $issue['author'] ?></a>
+                            <?php } ?>
+                        </span>
                     </div>
                     <div class="issuelist-stats col-4 col-md-3 pt-2 pe-3 text-end hide-sm">
                         <?php CommentsAmmount($issue, $db); ?>
