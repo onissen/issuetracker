@@ -30,10 +30,16 @@
                 $subs = explode(':', $value);
                 $queries[$key]['type'] = $subs[0];
                 $queries[$key]['q'] = $subs[1];
-                
+
             } else {
                 $queries[$key-1]['q'] .= ' '.$value;
             }
+        }
+
+        foreach ($queries as $key => $value) {
+            $SearchQuery[$queries[$key]['type']] = $queries[$key]['q'];
+            print_r($SearchQuery);
+            // TODO: Hier jetzt die Suche mit PHP oder JS weiter bauen
         }
     }
 
