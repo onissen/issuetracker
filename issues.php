@@ -80,8 +80,7 @@
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm">
+                <input type="text" name="search" id="search-issues" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>">
             </div>
         </div>
         <div class="col-md-4 search-nav">
