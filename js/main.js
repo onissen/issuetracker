@@ -15,3 +15,26 @@ searchbox.addEventListener("keyup", function(event) {
         location.search = URLRequest;
     }
 });
+
+function searchIssues () {
+    var input, filter, table, tr, td, i, txtValue;
+    
+    input = document.getElementById('search-issues');
+    filter = input.value.toLowerCase();
+    
+    table = document.getElementById('myTable') // FIXME: Das wäre der alles umschließende div ?!
+    tr = table.getElementsByTagName('tr'); // FIXME: Wäre jeder weitere DIv Eintrag...
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName('td')[0];
+        
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
