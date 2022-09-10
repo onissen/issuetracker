@@ -1,5 +1,5 @@
 searchbox = document.querySelector("#search-issues");
-URLRequest=location.search;
+URLRequest = location.search;
 searchbox.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.key === "Enter") {

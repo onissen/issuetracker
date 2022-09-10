@@ -21,6 +21,23 @@
     $query_averages->execute();
     $averages = $query_averages->fetch();
 
+
+    if (isset($_REQUEST['search'])) {
+        $raw_search = explode(' ', $_REQUEST['search']);
+        
+        foreach ($raw_search as $key => $value) {
+            if (strpos($value, ':') != false) {
+                $subs = explode(':', $value);
+                $queries[$key]['type'] = $subs[0];
+                $queries[$key]['q'] = $subs[1];
+                
+            } else {
+                $queries[$key-1]['q'] .= ' '.$value;
+            }
+        }
+    }
+
+
     $topicid = $info['tpid'];
     if (isset($_REQUEST['filter'])) {
         if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='open' ORDER BY issue_id DESC";}
