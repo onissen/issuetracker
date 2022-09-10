@@ -22,10 +22,19 @@
     $averages = $query_averages->fetch();
 
     $topicid = $info['tpid'];
-    $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid ORDER BY issue_id DESC";
+    if (isset($_REQUEST['filter'])) {
+        if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='open' ORDER BY issue_id DESC";}
+        if ($_REQUEST['filter'] == 'closed') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='closed' ORDER BY issue_id DESC";}
+        if ($_REQUEST['filter'] == 'all') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid ORDER BY issue_id DESC";}
+    } else {
+        $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='open' ORDER BY issue_id DESC";
+    }
     $result_issues = $db->query($sql_issues)->fetchAll();
 
-    function CommentsAmmount ($issue, $db) {
+    function CommentsAmmount ($issue) {
+        global $SiteURL;
+        global $info;
+        global $db;
         $current_issue = $issue['sql_id'];
         $sql_comment_average = "SELECT COUNT(sql_id) AS average FROM comments WHERE issue_id=$current_issue";
         $query_comments = $db->prepare($sql_comment_average);
@@ -34,7 +43,7 @@
 
         if($comment_average['average'] > 1) { ?>
             <span class="comments-average">
-                <a href="" class="link-muted text-decoration-none">
+                <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['issue_id'] ?>" class="link-muted text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path>
                     </svg>
@@ -54,16 +63,25 @@
                         <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
                     </svg>
                 </span>
-                <button class="btn btn-sm  btn-inputpart dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+                <button class="btn btn-sm  btn-inputpart dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php 
+                        if (isset($_REQUEST['filter'])) {
+                            if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {echo 'Offene Issues';}
+                            if ($_REQUEST['filter'] == 'closed') {echo 'Erledigte Issues';}
+                            if ($_REQUEST['filter'] == 'all') {echo 'Alle Issues';}
+                        } else {echo 'Offene Issues';}
+                    ?>
+                </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?q=all:">Alle Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=open:">Offene Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=closed:">Erledigte Issues</a></li>
+                    <li><a class="dropdown-item" href="?filter=all">Alle Issues</a></li>
+                    <li><a class="dropdown-item" href="?filter=open">Offene Issues</a></li>
+                    <li><a class="dropdown-item" href="?filter=closed">Erledigte Issues</a></li>
                     <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="q" id="search-issues" class="form-control form-control-sm" value="open:">
+
+                <input type="text" name="q" id="search-issues" class="form-control form-control-sm">
             </div>
         </div>
         <div class="col-md-4 search-nav">
@@ -99,13 +117,13 @@
             </div>
             <div class="listnav row flex-auto w-100">
                 <div class="d-none d-lg-block states col-md-3">
-                    <a href="?q=open:" class="btn-link selected">
+                    <a href="?filter=open" class="btn-link <?php if (isset($_REQUEST['filter'])) {if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {echo 'selected';}} else {echo 'selected';} ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                             <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
                         </svg>
                         <?php echo $averages['issues_open'].' Offen'; ?>
                     </a>
-                    <a href="?q=closed:" class="btn-link">
+                    <a href="?filter=closed" class="btn-link <?php if($_REQUEST['filter'] == 'closed'){echo 'selected';} ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                             <path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
                         </svg>
@@ -181,7 +199,7 @@
                         <?php } ?>
                     </div>
                     <div class="issuelist-content p-2 pe-3 pe-md-2 w-100">
-                        <a class="title-link" href="" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
+                        <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['issue_id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
                         <span class="text-small issuelist-meta">
                             <?php if ($issue['status'] == 'closed') { ?>
                                 #<?php echo $issue['issue_id'] ?> von <a href="" class="link-muted"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
@@ -191,7 +209,7 @@
                         </span>
                     </div>
                     <div class="issuelist-stats col-4 col-md-3 pt-2 pe-3 text-end hide-sm">
-                        <?php CommentsAmmount($issue, $db); ?>
+                        <?php CommentsAmmount($issue); ?>
                     </div>
                 </div>
             <?php } ?>
