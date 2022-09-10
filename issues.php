@@ -13,6 +13,8 @@
 ?>
 
 <?php
+    $topicid = $info['tpid'];
+
     // TODO: Hier Label und Milestone Anzahl einfügen
     $sql_averages = "SELECT (SELECT COUNT(issue_id) FROM issues WHERE status = 'open') as issues_open, 
     (SELECT COUNT(issue_id) FROM issues WHERE status = 'closed') as issues_closed";
@@ -20,39 +22,6 @@
     $query_averages = $db->prepare($sql_averages);
     $query_averages->execute();
     $averages = $query_averages->fetch();
-
-
-    if (isset($_REQUEST['search'])) {
-        $raw_search = explode(' ', $_REQUEST['search']);
-        
-        foreach ($raw_search as $key => $value) {
-            if (strpos($value, ':') != false) {
-                $subs = explode(':', $value);
-                $queries[$key]['type'] = $subs[0];
-                $queries[$key]['q'] = $subs[1];
-
-            } else {
-                $queries[$key-1]['q'] .= ' '.$value;
-            }
-        }
-
-        foreach ($queries as $key => $value) {
-            $SearchQuery[$queries[$key]['type']] = $queries[$key]['q'];
-            print_r($SearchQuery);
-            // TODO: Hier jetzt die Suche mit PHP oder JS weiter bauen
-        }
-    }
-
-
-    $topicid = $info['tpid'];
-    if (isset($_REQUEST['filter'])) {
-        if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='open' ORDER BY issue_id DESC";}
-        if ($_REQUEST['filter'] == 'closed') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='closed' ORDER BY issue_id DESC";}
-        if ($_REQUEST['filter'] == 'all') {$sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid ORDER BY issue_id DESC";}
-    } else {
-        $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid AND status='open' ORDER BY issue_id DESC";
-    }
-    $result_issues = $db->query($sql_issues)->fetchAll();
 
     function CommentsAmmount ($issue) {
         global $SiteURL;
@@ -75,6 +44,8 @@
             </span>
         <?php }
     }
+
+    require 'components/search_function.php';
 ?>
 
 <div class="container container-xl mt-4">
@@ -197,7 +168,7 @@
                 </div>
             </div>
         </div> <!-- .issuelist-header -->
-        <div class="issuelist-list">
+        <div class="issuelist-list" id="issuelist-list">
             <?php foreach ($result_issues as $issue) { ?>
                 <div id="<?php echo $issue['sql_id'] ?>" class="issuelist-item d-flex">
                     <label for="check-item" class="checklabel-item py-2 ps-3">
@@ -224,9 +195,9 @@
                         <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['issue_id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
                         <span class="text-small issuelist-meta">
                             <?php if ($issue['status'] == 'closed') { ?>
-                                #<?php echo $issue['issue_id'] ?> von <a href="" class="link-muted"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
+                                <span class="id">#<?php echo $issue['issue_id'] ?></span> von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
                             <?php } else { ?>
-                                #<?php echo $issue['issue_id'] ?> am <?php echo $issue['date_opened']; ?> eröffnet von <a href="" class="link-muted"><?php echo $issue['author'] ?></a>
+                                <span class="id">#<?php echo $issue['issue_id'] ?></span> am <?php echo $issue['date_opened']; ?> eröffnet von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a>
                             <?php } ?>
                         </span>
                     </div>

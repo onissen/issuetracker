@@ -13,28 +13,36 @@ searchbox.addEventListener("keyup", function(event) {
 
         } else {URLRequest = '?search='+searchbox.value;}
         location.search = URLRequest;
+        searchIssues();
     }
 });
 
-function searchIssues () {
-    var input, filter, table, tr, td, i, txtValue;
-    
-    input = document.getElementById('search-issues');
-    filter = input.value.toLowerCase();
-    
-    table = document.getElementById('myTable') // FIXME: Das wäre der alles umschließende div ?!
-    tr = table.getElementsByTagName('tr'); // FIXME: Wäre jeder weitere DIv Eintrag...
+// SearchInput = document.getElementById('search-issues');
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName('td')[0];
+
+// function searchIssues () {
+//     var input, filter, listDiv, itemDiv, td, i, txtValue;
+    
+//     input = document.getElementById('search-issues');
+//     filter = input.value.toLowerCase();
+    
+//     listDiv = document.getElementById('issuelist-list'); // FIXME: Das wäre der alles umschließende div ?!
+//     itemDiv = listDiv.querySelectorAll('issuelist-item'); // FIXME: Wäre jeder weitere DIv Eintrag...
+
+//     for (i = 0; i < itemDiv.length; i++) {
+//         // td = itemDiv[i].getElementsByTagName('td')  [0];
+//         title = itemDiv[i].querySelector('.title-link');
+//         id = itemDiv[i].querySelector('.issuelist-meta.id');
+//         author = itemDiv[i].querySelector('.issuelist-meta.author');
+//         //TODO: HIer noch LAbels, Milestones... 
         
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
+//         if (title) {
+//             txtValue = title.textContent || title.innerText;
+//             if (txtValue.toLowerCase().indexOf(filter) > -1) {
+//                 itemDiv[i].style.display = "";
+//             } else {
+//                 itemDiv[i].style.display = "none";
+//             }
+//         }
+//     }
+// }
