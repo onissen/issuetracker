@@ -8,6 +8,13 @@
         $sql_param = "AND status='open'";
     }
 
+    $sql_columns = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA = 'issuetracker' AND TABLE_NAME = 'issues'";
+    $result_columns = $db_structure->query($sql_columns)->fetchAll();
+    // print_r($result_columns);
+    foreach ($result_columns as $key => $value) {
+        $search_columns[$key] = $value['COLUMN_NAME'];
+    }
+
     // Wenn Suchbegriffe eingegeben sind
     if (isset($_REQUEST['search'])) {
         // Suchbegriffe an den Leerzeichen teilen
@@ -16,8 +23,10 @@
         foreach ($raw_search as $key => $value) {
             // Wenn der einzelne Begriff einen bestimmten typ: hat, nimm ihn auseinander und übergebe ihn in PHP Array
             if (strpos($value, ':') != false) {
+                // Wenn ein Typ angegeben wurde
                 $subs = explode(':', $value);
-                $queries[$key]['type'] = $subs[0];
+                if (in_array($subs[0], $search_columns)) {$queries[$key]['type'] = $subs[0];}
+                else {$queries[$key]['type'] = 'query';}
                 $queries[$key]['q'] = $subs[1];
 
             } else {
