@@ -37,7 +37,7 @@
             $SearchTerm = $queries[$key]['q'];
             // Wenn kein Typ oder der allgemeine query angegeben ist wird alles durchsucht
             if ($SearchRow == 'query') {
-                $sql_param .= "AND(title LIKE '%$SearchTerm%' OR author LIKE '%$SearchTerm%' OR issue_id LIKE '%$SearchTerm%' OR status LIKE '%$SearchTerm%')";
+                $sql_param .= "AND(title LIKE '%$SearchTerm%' OR author LIKE '%$SearchTerm%' OR id LIKE '%$SearchTerm%' OR status LIKE '%$SearchTerm%')";
             }
             // Sonst wird jeder Parameter automatisch einzeln hinzugefügt
             else {$sql_param .= " AND $SearchRow LIKE '%$SearchTerm%'";}
@@ -45,6 +45,6 @@
     }
 
     // Anweisung zusammen schustern
-    $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid $sql_param ORDER BY issue_id DESC";
+    $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid $sql_param ORDER BY id DESC";
     $result_issues = $db->query($sql_issues)->fetchAll();
 ?>

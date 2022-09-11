@@ -16,8 +16,8 @@
     $topicid = $info['tpid'];
 
     // TODO: Hier Label und Milestone Anzahl einfügen
-    $sql_averages = "SELECT (SELECT COUNT(issue_id) FROM issues WHERE status = 'open') as issues_open, 
-    (SELECT COUNT(issue_id) FROM issues WHERE status = 'closed') as issues_closed";
+    $sql_averages = "SELECT (SELECT COUNT(id) FROM issues WHERE status = 'open') as issues_open, 
+    (SELECT COUNT(id) FROM issues WHERE status = 'closed') as issues_closed";
 
     $query_averages = $db->prepare($sql_averages);
     $query_averages->execute();
@@ -35,7 +35,7 @@
 
         if($comment_average['average'] > 1) { ?>
             <span class="comments-average">
-                <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['issue_id'] ?>" class="link-muted text-decoration-none">
+                <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" class="link-muted text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path>
                     </svg>
@@ -192,12 +192,12 @@
                         <?php } ?>
                     </div>
                     <div class="issuelist-content p-2 pe-3 pe-md-2 w-100">
-                        <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['issue_id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
+                        <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
                         <span class="text-small issuelist-meta">
                             <?php if ($issue['status'] == 'closed') { ?>
-                                <span class="id">#<?php echo $issue['issue_id'] ?></span> von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
+                                <span class="id">#<?php echo $issue['id'] ?></span> von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
                             <?php } else { ?>
-                                <span class="id">#<?php echo $issue['issue_id'] ?></span> am <?php echo $issue['date_opened']; ?> eröffnet von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a>
+                                <span class="id">#<?php echo $issue['id'] ?></span> am <?php echo $issue['date_opened']; ?> eröffnet von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a>
                             <?php } ?>
                         </span>
                     </div>
