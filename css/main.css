@@ -265,4 +265,26 @@ svg {
   text-decoration: none;
 }
 
+#issuelist-noresults {
+  margin-right: auto;
+  margin-left: auto;
+  border-left: 1px solid #d8dee4;
+  border-right: 1px solid #d8dee4;
+  border-bottom: 1px solid #d8dee4;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+#issuelist-noresults #noresult-message {
+  padding: 80px 40px;
+  text-align: center;
+}
+#issuelist-noresults #noresult-message svg {
+  color: #57606a;
+  margin: 0 4px 8px 4px;
+}
+#issuelist-noresults #noresult-message h3 {
+  margin: 16px 0;
+  font-size: 24px;
+}
+
 /*# sourceMappingURL=main.css.map */
