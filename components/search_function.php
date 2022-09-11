@@ -56,4 +56,5 @@
     // Anweisung zusammen schustern
     $sql_issues = "SELECT issues.* FROM issues WHERE tpid = $topicid $sql_param ORDER BY id DESC";
     $result_issues = $db->query($sql_issues)->fetchAll();
+    $searchResults= $db->query($sql_issues)->rowCount();
 ?>
