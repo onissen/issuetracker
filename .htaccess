@@ -4,5 +4,5 @@
     RewriteCond %{SCRIPT_FILENAME} !-d
     RewriteCond %{SCRIPT_FILENAME} !-f
     
-    RewriteRule ^(.*)$ ./checkurl.php?site=$1 [L,QSA]
+    RewriteRule ^(.*)$ ./index.php?site=$1 [L,QSA]
 </IfModule>
