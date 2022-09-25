@@ -14,7 +14,7 @@
         <nav class="topic-nav px-3 px-md-4 px-lg-5">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>">
+                    <a id="issues_pill" class="nav-link" aria-current="page" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                             <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                             <path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
@@ -30,3 +30,10 @@
         Achtung! Die Datenbankinhalte fehlen!
     </div>
 <?php } ?>
+<script>
+    activeEndpoint = "<?php echo end($endpoints); ?>";
+    activePill = activeEndpoint+'_pill';
+    pill = document.getElementById(activePill);
+    if (pill != null) {pill.classList.add('active');}
+    else {document.getElementById('issues_pill').classList.add('active')}
+</script>
