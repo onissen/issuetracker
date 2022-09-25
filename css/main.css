@@ -41,6 +41,10 @@ svg {
   fill: currentcolor;
 }
 
+.btn:hover {
+  text-decoration: none;
+}
+
 .topic-header {
   background-color: #F6F8FA;
   padding: 0;
@@ -288,6 +292,11 @@ svg {
 #issuelist-noresults #noresult-message h3 {
   margin: 16px 0;
   font-size: 24px;
+}
+
+.label-states {
+  font-weight: 600;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=main.css.map */

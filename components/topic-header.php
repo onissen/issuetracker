@@ -1,3 +1,11 @@
+<?php
+    $sqltopic = $endpoints[1];
+    $sql = "SELECT topics.*, channels.* FROM topics NATURAL JOIN channels WHERE topics.topic = '$sqltopic'";
+    $result = $db->prepare($sql);
+    $result->execute();
+    $info = $result->fetch();
+?>
+
 <?php if (isset($info)) { ?>
     <div class="topic-header container-fluid pt-3">
         <div class="topic-headline px-3 px-md-4 px-lg-5">
