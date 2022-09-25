@@ -9,8 +9,6 @@
     }
     $endpoit_lvl = count($endpoints);
 
-    print_r($endpoints);
-    echo($endpoit_lvl);
 
     if (isset($endpoit_lvl)) {
         if ($endpoit_lvl <= 1) {

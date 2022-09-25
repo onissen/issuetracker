@@ -92,6 +92,9 @@ svg {
   display: flex;
   align-items: center;
 }
+.topic-nav .nav-link:hover {
+  text-decoration: none;
+}
 .topic-nav .nav-link svg {
   fill: currentcolor;
   margin-right: 8px;
