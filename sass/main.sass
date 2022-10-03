@@ -15,6 +15,10 @@ $gh-subnav-color: #24292f
 $gh-open: #1a7f37
 $gh-closed: #8250df
 
+// FIXME: unwichtig?
+// .flex-1
+//     flex: 1
+
 .text-small
     font-size: 12px
 
@@ -109,3 +113,14 @@ svg
 @import topics
 @import issuelist
 @import labels
+
+.btn-gh
+    color: $gh-subnav-color
+    background-color: $gh-subnav-bg
+    border: $gh-subnav-border
+
+    &:hover
+        background-color: $gh-subnav-hover-bg
+        border: $gh-subnav-border
+
+    

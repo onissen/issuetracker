@@ -19,3 +19,36 @@
 
     &:hover
         text-decoration: underline
+
+#col-buttons div
+    margin-top: 2rem
+
+.gh-popover
+    position: absolute
+    z-index: 100
+    visibility: hidden
+
+    &.color-popover
+        width: 270px
+
+    .popover-message
+        position: relative
+        width: 232px
+        margin-right: auto
+        margin-left: auto
+        background-color: white
+        border: 1px solid $gh-border-color
+        border-radius: 6px
+
+    .popover-message-bottom-left
+        margin-left: 0
+
+.color-popover
+    p
+        font-size: 12px
+
+    .color-swatch
+        width: 24px
+        height: 24px
+        border-radius: 6px
+        border: none
