@@ -16,3 +16,10 @@ searchbox.addEventListener("keyup", function(event) {
         searchIssues();
     }
 });
+
+function toggleDelete(labelid) {
+    if (confirm
+        (
+"Soll dieses Label wirklich gelöscht werden? Es wird dann von allen Inhalten entfernt."
+        )) { location="?deleted="+labelid}
+}

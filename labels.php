@@ -14,6 +14,16 @@
     function IssueAmount() {
         // Kann erst ausgewertet werden, wenn die Labels vergeben sind...
     }
+
+    if (isset($_REQUEST['deleted'])) {
+        $labelid = $_REQUEST['deleted'];
+        $sql_delete = "DELETE FROM labels WHERE $labelid";
+        $stmt_delete = $db->prepare($sql_delete);
+        $stmt_delete->execute();
+        if ($stmt_delete->execute()) {
+            echo '<script type="text/JavaScript"> location.search = "";</script>';
+        }
+    }
 ?>
 
 <div class="container container-xl mt-4">
@@ -61,7 +71,7 @@
         <div class="issuelist-list" id="issuelist-list">
             <?php if ($labelAverage > 0) { ?>
                 <?php foreach ($result_list as $list) { ?>
-                    <div class="issuelist-item d-flex p-3" id="labelid">
+                    <div class="issuelist-item d-flex p-3" id="<?php echo $list['labelid']; ?>">
                         <div class="issuelist-content w-100">
                             <div class="label-badge badge rounded-pill" style="background-color: <?php echo $list['color'] ?>"><?php echo $list['name'] ?></div>
                         </div>
@@ -69,9 +79,9 @@
                         <?php IssueAmount() ?>
                         <div class="labellist-issues w-100">x offene Issues</div>
                         <div class="labellist-actions text-end d-lg-flex d-none">
-                            <button class="ms-3 btn btn-link">Edit</button>
+                            <button class="ms-3 btn btn-link">Bearbeiten</button>
                                 <!-- Dann Collapse -->
-                            <button class="ms-3 btn btn-link" type="submit" onclick="toggleDelete()">Delete</button>
+                            <button class="ms-3 btn btn-link" name="deleteLabel" type="submit" onclick="toggleDelete(<?php echo $list['labelid'] ?>)">Löschen</button>
                         </div>
                     </div>
                 <?php } ?>
