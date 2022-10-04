@@ -35,32 +35,32 @@ const hideElements = document.getElementsByClassName('js-hide'+id);
 }
 
 function toggleColorPicker(id) {
-  document.getElementById('popover-'+id).style.visibility = 'visible';
+  document.getElementById('popover-color'+id).style.visibility = 'visible';
 }
 
 function chooseColor(color, id) {
-  document.getElementById('input-'+id).value = color;
-  document.getElementById('popover-'+id).style.visibility = 'hidden';
-  document.getElementById('button-'+id).style.backgroundColor = color;
-  document.getElementById('badge-'+id).style.backgroundColor = color;
+  document.getElementById('input-color'+id).value = color;
+  document.getElementById('popover-color'+id).style.visibility = 'hidden';
+  document.getElementById('button-color'+id).style.backgroundColor = color;
+  document.getElementById('badge-color'+id).style.backgroundColor = color;
 }
 
 function dynamicBtnColor (id) {
-  color = document.getElementById('input-'+id).value;
+  color = document.getElementById('input-color'+id).value;
   if (color == '') {
-    document.getElementById('input-'+id).value = '#';
+    document.getElementById('input-color'+id).value = '#';
   }
 
   if (!color.startsWith('#')) {
-    document.getElementById('input-'+id).value = '#'+color;
+    document.getElementById('input-color'+id).value = '#'+color;
   }
 
   if (color.length == 4 || color.length == 7) {
-    document.getElementById('button-'+id).style.backgroundColor = color;
-    document.getElementById('badge-'+id).style.backgroundColor = color;
-    document.getElementById('input-'+id).style.color = 'black';
+    document.getElementById('button-color'+id).style.backgroundColor = color;
+    document.getElementById('badge-color'+id).style.backgroundColor = color;
+    document.getElementById('input-color'+id).style.color = 'black';
   } else {
-    document.getElementById('input-'+id).style.color = '#cf222e';
+    document.getElementById('input-color'+id).style.color = '#cf222e';
   }
 }
 
@@ -82,13 +82,20 @@ function randomBtnColor (id) {
   '#C5DEF5',
   '#BFD4F2',
   '#D4C5F9'
-  )
+  );
     
     
   
   const pickRandom = Colors[Math.floor(Math.random()*Colors.length)];
 
-  document.getElementById('button-'+id).style.backgroundColor = pickRandom;
-  document.getElementById('badge-'+id).style.backgroundColor = pickRandom;
-  document.getElementById('input-'+id).value = pickRandom;
+  document.getElementById('button-color'+id).style.backgroundColor = pickRandom;
+  document.getElementById('badge-color'+id).style.backgroundColor = pickRandom;
+  document.getElementById('input-color'+id).value = pickRandom;
+}
+
+function dynamicPreviewText () {
+  text = document.getElementById('input-namePreview').value;
+
+  if (text != '') {document.getElementById('badge-colorNew').innerHTML = text;} 
+  else {document.getElementById('badge-colorNew').innerHTML = 'Label Vorschau';}
 }
