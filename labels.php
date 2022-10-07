@@ -7,7 +7,14 @@
 
 <?php 
     $topicid = $info['tpid'];
-    $sql_list = "SELECT * FROM labels WHERE topicid = $topicid ORDER BY name";
+
+    if (isset($_REQUEST['search'])) {
+        $SearchTerm = $_REQUEST['search'];
+        $sql_list = "SELECT * FROM labels WHERE topicid = $topicid AND (name LIKE '%$SearchTerm%' OR description LIKE '%$SearchTerm%') ORDER BY name";
+    } else {
+        $sql_list = "SELECT * FROM labels WHERE topicid = $topicid ORDER BY name";
+    }
+    
     $result_list = $db->query($sql_list)->fetchAll();
     $labelAverage = $db->query($sql_list)->rowCount();
 
@@ -53,22 +60,16 @@
 ?>
 
 <div class="container container-xl mt-4">
-    <!-- TODO: Suche -->
-    <div class="searchbar row">
-        <form id="label-searchForm" class="querybox col-md-6 col-12" method="get">
+    <div class="row searchbar">
+        <div class="col-md-8 querybox">
             <div class="input-group">
                 <span class="input-group-text form-control-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
                     </svg>
                 </span>
-                <input type="text" name="search" id="search-labels" class="form-control form-control-sm" placeholder="Label suchen" autocomplete="off">
+                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];}?>" autocomplete="off" placeholder="Alle Labels durchsuchen">
             </div>
-        </form>
-        <div class="col text-end">
-            <button class="btn btn-primary" data-bs-toggle="collapse" href="#wrapper-new" role="button" aria-expanded="false" aria-controls="wrapper-new" onclick="randomBtnColor('New')">
-                Neues Label
-            </button>
         </div>
     </div>
 
