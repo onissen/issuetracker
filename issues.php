@@ -210,6 +210,7 @@
                         </svg>
                         <h3>Deine Suche ergab keine Ergebnisse.</h3>
                         <p>Versuche einen anderen Suchbegriff.</p>
+                        <!-- TODO: Message anpassen -->
                     </div>
                 </div>
             <?php } ?>

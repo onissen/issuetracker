@@ -93,9 +93,9 @@ function randomBtnColor (id) {
   document.getElementById('input-color'+id).value = pickRandom;
 }
 
-function dynamicPreviewText () {
-  text = document.getElementById('input-namePreview').value;
+function dynamicPreviewText (id) {
+  text = document.getElementById('input-name'+id).value;
 
-  if (text != '') {document.getElementById('badge-colorNew').innerHTML = text;} 
-  else {document.getElementById('badge-colorNew').innerHTML = 'Label Vorschau';}
+  if (text != '') {document.getElementById('badge-color'+id).innerHTML = text;} 
+  else {document.getElementById('badge-color'+id).innerHTML = 'Label Vorschau';}
 }
