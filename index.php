@@ -24,7 +24,9 @@
 
         elseif ($endpoit_lvl == 3) {
             // Unterseiten der Repo
-            echo end($endpoints);
+            if (end($endpoints) == 'labels') {
+                include 'labels.php';
+            }
         }
 
         // elseif ($endpoit_lvl = 4) {

@@ -10,7 +10,6 @@
 
     $sql_columns = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA = 'issuetracker' AND TABLE_NAME = 'issues'";
     $result_columns = $db_structure->query($sql_columns)->fetchAll();
-    // print_r($result_columns);
     foreach ($result_columns as $key => $value) {
         $search_columns[$key] = $value['COLUMN_NAME'];
     }

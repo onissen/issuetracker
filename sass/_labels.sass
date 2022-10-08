@@ -1,0 +1,73 @@
+.label-states
+    font-weight: 600
+    font-size: 14px
+
+.label-badge
+    font-size: 12px
+    font-weight: 500
+    line-height: 22px
+    padding: 0 10px
+
+    &:hover
+        text-decoration: none
+        color: white
+        // TODO: Muss geändert werden, wenn die Schriftfarbe bei den Labels bedacht wird
+
+
+.labellist-issues, .labellist-description, .labellist-actions button
+    font-size: 12px
+    line-height: 1.5
+    padding: 0
+    color: $gh-muted
+
+.labellist-actions button
+    text-decoration: none
+
+    &:hover
+        text-decoration: underline
+
+.listlink
+    color: $gh-muted
+
+    &:hover
+        text-decoration: none
+
+#col-buttons div
+    margin-top: 2rem
+
+.gh-popover
+    position: absolute
+    z-index: 100
+    visibility: hidden
+
+    &.color-popover
+        width: 270px
+
+    .popover-message
+        position: relative
+        width: 232px
+        margin-right: auto
+        margin-left: auto
+        background-color: white
+        border: 1px solid $gh-border-color
+        border-radius: 6px
+
+    .popover-message-bottom-left
+        margin-left: 0
+
+.color-popover
+    p
+        font-size: 12px
+
+    .color-swatch
+        width: 24px
+        height: 24px
+        border-radius: 6px
+        border: none
+
+#wrapper-new
+    padding: 16px
+    border: $gh-subnav-border
+    background-color: $gh-background
+    border-radius: 6px
+    margin: 0 -12px

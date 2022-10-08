@@ -4,11 +4,6 @@
 ?>
 
 <?php
-    $sqltopic = $endpoints[1];
-    $sql = "SELECT topics.*, channels.* FROM topics NATURAL JOIN channels WHERE topics.topic = '$sqltopic'";
-    $result = $db->prepare($sql);
-    $result->execute();
-    $info = $result->fetch();
     include 'components/topic-header.php';
 ?>
 
@@ -17,7 +12,7 @@
 
     // TODO: Hier Label und Milestone Anzahl einfügen
     $sql_averages = "SELECT (SELECT COUNT(id) FROM issues WHERE status = 'open') as issues_open, 
-    (SELECT COUNT(id) FROM issues WHERE status = 'closed') as issues_closed";
+    (SELECT COUNT(id) FROM issues WHERE status = 'closed') as issues_closed, (SELECT COUNT(labelid) FROM labels WHERE topicid = $topicid) as average_labels";
 
     $query_averages = $db->prepare($sql_averages);
     $query_averages->execute();
@@ -46,6 +41,12 @@
     }
 
     require 'components/search_function.php';
+
+    $sql_labels = "SELECT labelid, name, color, description FROM labels WHERE topicid = $topicid";
+    $result_labels = $db->query($sql_labels)->fetchAll();
+    foreach ($result_labels as $key) {
+        $lableData[$key['labelid']] = $key;
+    }
 ?>
 
 <div class="container container-xl mt-4">
@@ -74,25 +75,25 @@
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="search" id="search-issues" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>">
+                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>" autocomplete="off">
             </div>
         </div>
-        <div class="col-md-4 search-nav">
+        <div class="col-md-4 search-nav text-end">
             <div class="btn-group">
-                <a href="/lables" id="labels" class="btn btn-sm btn-outline-gh" role="button">
+                <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/labels' ?>" id="labels" class="btn btn-sm btn-outline-gh" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path>
                     </svg>
                      Labels 
-                    <span class="badge rounded-pill">x</span>
+                    <span class="badge rounded-pill"><?php echo $averages['average_labels'] ?></span>
                 </a>
-                <a href="/milestones" id="milestones" class="btn btn-sm btn-outline-gh" role="button">
+                <!-- <a href="<?php echo $_SERVER['REQUEST_URI'].'/milestones' ?>" id="milestones" class="btn btn-sm btn-outline-gh" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M7.75 0a.75.75 0 01.75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 010 2.672l-2.07 1.75a1.75 1.75 0 01-1.13.414H8.5v5.25a.75.75 0 11-1.5 0V10H2.75A1.75 1.75 0 011 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 017.75 0zm0 8.5h4.384a.25.25 0 00.161-.06l2.07-1.75a.25.25 0 000-.38l-2.07-1.75a.25.25 0 00-.161-.06H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h5z"></path>
                     </svg>
                      Meilensteine 
                     <span class="badge rounded-pill">x</span>
-                </a>
+                </a> -->
             </div>
             <a href="/new" class="btn btn-sm btn-primary" role="button" id="new-issue">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -133,7 +134,14 @@
                     <div class="filterbar-item" id="label">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Label</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Label</a></li>
+                            <?php foreach ($result_labels as $label) { ?>
+                                <li>
+                                    <a class="dropdown-item" href="?search=label:<?php echo $label['labelid'] ?>">
+                                        <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
+                                        <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <div class="filterbar-item" id="project">                       
@@ -142,12 +150,12 @@
                             <li><a class="dropdown-item" href="#">Foreach Project</a></li>
                         </ul>
                     </div>
-                    <div class="filterbar-item" id="milestone">                       
+                    <!-- <div class="filterbar-item" id="milestone">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="filterbar-item" id="assignee">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verantwortlicher</a>
                         <ul class="dropdown-menu">
@@ -193,7 +201,17 @@
                             <?php } ?>
                         </div>
                         <div class="issuelist-content p-2 pe-3 pe-md-2 w-100">
-                            <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
+                            <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" 
+                            id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a>
+                            <?php
+                                $lableIDs = explode('..', $issue['label']);
+                                foreach ($lableIDs as $id) {
+                                    if ($id == $lableData[$id]['labelid']) { ?>
+                                        <a href="?search=label:<?php echo $lableData[$id]['labelid'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
+                                    <?php }
+                                }
+                            ?>
+                            <br>
                             <span class="text-small issuelist-meta">
                                 <?php if ($issue['status'] == 'closed') { ?>
                                     <span class="id">#<?php echo $issue['id'] ?></span> von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
@@ -213,8 +231,13 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill-rule="evenodd" d="M2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 13a2 2 0 100-4 2 2 0 000 4z"></path>
                         </svg>
-                        <h3>Deine Suche ergab keine Ergebnisse.</h3>
-                        <p>Versuche einen anderen Suchbegriff.</p>
+                        <?php if (isset($_REQUEST['search'])) { ?>
+                            <h3>Keine passenden Issues</h3>
+                            <p>Versuche einen anderen Suchbegriff.</p>
+                        <?php } else { ?>
+                            <h3>Hier landen die Issues</h3>
+                            <p>Issues werden genutzt um Todos, Bugs, Feature-Anfragen und mehr zu dokumentieren.</p>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
