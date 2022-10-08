@@ -42,12 +42,11 @@
 
     require 'components/search_function.php';
 
-    $sql_labels = "SELECT labelid, name, color FROM labels WHERE topicid = $topicid";
+    $sql_labels = "SELECT labelid, name, color, description FROM labels WHERE topicid = $topicid";
     $result_labels = $db->query($sql_labels)->fetchAll();
     foreach ($result_labels as $key) {
         $lableData[$key['labelid']] = $key;
     }
-
 ?>
 
 <div class="container container-xl mt-4">
@@ -81,7 +80,7 @@
         </div>
         <div class="col-md-4 search-nav text-end">
             <div class="btn-group">
-                <a href="<?php echo $_SERVER['REQUEST_URI'].'/labels' ?>" id="labels" class="btn btn-sm btn-outline-gh" role="button">
+                <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/labels' ?>" id="labels" class="btn btn-sm btn-outline-gh" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                         <path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path>
                     </svg>
@@ -135,7 +134,14 @@
                     <div class="filterbar-item" id="label">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Label</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Label</a></li>
+                            <?php foreach ($result_labels as $label) { ?>
+                                <li>
+                                    <a class="dropdown-item" href="?search=label:<?php echo $label['labelid'] ?>">
+                                        <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
+                                        <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <div class="filterbar-item" id="project">                       
@@ -144,12 +150,12 @@
                             <li><a class="dropdown-item" href="#">Foreach Project</a></li>
                         </ul>
                     </div>
-                    <div class="filterbar-item" id="milestone">                       
+                    <!-- <div class="filterbar-item" id="milestone">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="filterbar-item" id="assignee">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verantwortlicher</a>
                         <ul class="dropdown-menu">

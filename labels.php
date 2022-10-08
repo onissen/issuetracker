@@ -18,8 +18,14 @@
     $result_list = $db->query($sql_list)->fetchAll();
     $labelAverage = $db->query($sql_list)->rowCount();
 
-    function IssueAmount() {
-        // TODO: Kann erst ausgewertet werden, wenn die Labels vergeben sind...
+    function IssueAmount($id) {
+        global $db;
+
+        $sql_IssueAmount = "SELECT COUNT(sql_id) AS average FROM issues WHERE (label LIKE '%..$id%' OR label LIKE '%$id..%') AND status = 'open'; ";
+        $query_issues = $db->prepare($sql_IssueAmount);
+        $query_issues->execute();
+        global $IssueAmount;
+        $IssueAmount = $query_issues->fetch();
     }
 
     if (isset($_REQUEST['deleted'])) {
@@ -166,8 +172,14 @@
                                 <div class="label-badge badge rounded-pill" id="badge-color<?php echo $list['labelid'] ?>" style="background-color: <?php echo $list['color'] ?>"><?php echo $list['name'] ?></div>
                             </div>
                             <div class="labellist-description js-hide<?php echo $list['labelid'] ?> pe-2 w-100"><?php echo $list['description'] ?></div>
-                            <?php IssueAmount() ?>
-                            <div class="labellist-issues js-hide<?php echo $list['labelid'] ?> w-100">x offene Issues</div>
+                            <div class="labellist-issues js-hide<?php echo $list['labelid'] ?> w-100">
+                                <?php IssueAmount($list['labelid']);
+                                if ($IssueAmount['average'] > 0) { ?>
+                                    <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'?search=label:'.$list['labelid'] ?>" class="listlink">
+                                        <?php echo $IssueAmount['average'] ?> offene Issues
+                                    </a>
+                                <?php } ?>
+                                </div>
                             <div class="labellist-actions text-end d-lg-flex d-none">
                                 <button class="js-hide<?php echo $list['labelid'] ?> ms-3 btn btn-link" data-bs-toggle="collapse" href="#wrapper-<?php echo $list['labelid']; ?>" role="button" aria-expanded="false" aria-controls="wrapper-<?php echo $list['labelid']; ?>" onclick="DisplayMeta('none', <?php echo $list['labelid']; ?>)">Bearbeiten</button>
                                 <button class="ms-3 btn btn-link" name="deleteLabel" type="submit" onclick="toggleDelete(<?php echo $list['labelid'] ?>)">Löschen</button>

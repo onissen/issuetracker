@@ -324,6 +324,13 @@ svg {
   text-decoration: underline;
 }
 
+.listlink {
+  color: #57606a;
+}
+.listlink:hover {
+  text-decoration: none;
+}
+
 #col-buttons div {
   margin-top: 2rem;
 }
