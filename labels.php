@@ -71,6 +71,9 @@
                 <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];}?>" autocomplete="off" placeholder="Alle Labels durchsuchen">
             </div>
         </div>
+        <div class="col-md-4 search-nav text-end">
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#wrapper-new" role="button" aria-expanded="false" aria-controls="wrapper-new" onclick="randomBtnColor('New')">Neues Label</button>
+        </div>
     </div>
 
     <div class="collapse my-3" id="wrapper-new">
@@ -236,9 +239,13 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path d="M7.75 6.5a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"></path><path fill-rule="evenodd" d="M2.5 1A1.5 1.5 0 001 2.5v8.44c0 .397.158.779.44 1.06l10.25 10.25a1.5 1.5 0 002.12 0l8.44-8.44a1.5 1.5 0 000-2.12L12 1.44A1.5 1.5 0 0010.94 1H2.5zm0 1.5h8.44l10.25 10.25-8.44 8.44L2.5 10.94V2.5z"></path>
                         </svg>
-                        <h3>Keine Labels</h3>
-                        <p>Es gibt keine Labels. Erstelle doch eins.</p>
-                        <!-- TODO: Message anpassen -->
+                        <?php if (isset($_REQUEST['search'])) { ?>
+                            <h3>Keine passenden Labels</h3>
+                            <p>Zu dem Suchbegriff konnten in diesem Thema keine Labels gefunden werden.</p>
+                        <?php } else {?>
+                            <h3>Keine Labels</h3>                        
+                            <p>Es gibt keine Labels. Erstelle doch eins.</p>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
