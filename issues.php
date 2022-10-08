@@ -12,7 +12,7 @@
 
     // TODO: Hier Label und Milestone Anzahl einfügen
     $sql_averages = "SELECT (SELECT COUNT(id) FROM issues WHERE status = 'open') as issues_open, 
-    (SELECT COUNT(id) FROM issues WHERE status = 'closed') as issues_closed";
+    (SELECT COUNT(id) FROM issues WHERE status = 'closed') as issues_closed, (SELECT COUNT(labelid) FROM labels WHERE topicid = $topicid) as average_labels";
 
     $query_averages = $db->prepare($sql_averages);
     $query_averages->execute();
@@ -41,6 +41,13 @@
     }
 
     require 'components/search_function.php';
+
+    $sql_labels = "SELECT labelid, name, color FROM labels WHERE topicid = $topicid";
+    $result_labels = $db->query($sql_labels)->fetchAll();
+    foreach ($result_labels as $key) {
+        $lableData[$key['labelid']] = $key;
+    }
+
 ?>
 
 <div class="container container-xl mt-4">
@@ -79,7 +86,7 @@
                         <path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path>
                     </svg>
                      Labels 
-                    <span class="badge rounded-pill">x</span>
+                    <span class="badge rounded-pill"><?php echo $averages['average_labels'] ?></span>
                 </a>
                 <!-- <a href="<?php echo $_SERVER['REQUEST_URI'].'/milestones' ?>" id="milestones" class="btn btn-sm btn-outline-gh" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -188,7 +195,17 @@
                             <?php } ?>
                         </div>
                         <div class="issuelist-content p-2 pe-3 pe-md-2 w-100">
-                            <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a><br>
+                            <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" 
+                            id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a>
+                            <?php
+                                $lableIDs = explode('..', $issue['labels']);
+                                foreach ($lableIDs as $id) {
+                                    if ($id == $lableData[$id]['labelid']) { ?>
+                                        <a href="?search=label:<?php echo $lableData[$id]['name'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
+                                    <?php }
+                                }
+                            ?>
+                            <br>
                             <span class="text-small issuelist-meta">
                                 <?php if ($issue['status'] == 'closed') { ?>
                                     <span class="id">#<?php echo $issue['id'] ?></span> von <a href="" class="link-muted author"><?php echo $issue['author'] ?></a> wurde am <?php echo $issue['date_closed'] ?> geschlossen
@@ -208,9 +225,13 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path fill-rule="evenodd" d="M2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 13a2 2 0 100-4 2 2 0 000 4z"></path>
                         </svg>
-                        <h3>Deine Suche ergab keine Ergebnisse.</h3>
-                        <p>Versuche einen anderen Suchbegriff.</p>
-                        <!-- TODO: Message anpassen -->
+                        <?php if (isset($_REQUEST['search'])) { ?>
+                            <h3>Keine passenden Issues</h3>
+                            <p>Versuche einen anderen Suchbegriff.</p>
+                        <?php } else { ?>
+                            <h3>Hier landen die Issues</h3>
+                            <p>Issues werden genutzt um Todos, Bugs, Feature-Anfragen und mehr zu dokumentieren.</p>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>

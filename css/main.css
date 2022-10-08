@@ -305,6 +305,10 @@ svg {
   line-height: 22px;
   padding: 0 10px;
 }
+.label-badge:hover {
+  text-decoration: none;
+  color: white;
+}
 
 .labellist-issues, .labellist-description, .labellist-actions button {
   font-size: 12px;
