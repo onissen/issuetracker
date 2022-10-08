@@ -198,10 +198,10 @@
                             <a class="title-link" href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'/issues/'.$issue['id'] ?>" 
                             id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a>
                             <?php
-                                $lableIDs = explode('..', $issue['labels']);
+                                $lableIDs = explode('..', $issue['label']);
                                 foreach ($lableIDs as $id) {
                                     if ($id == $lableData[$id]['labelid']) { ?>
-                                        <a href="?search=label:<?php echo $lableData[$id]['name'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
+                                        <a href="?search=label:<?php echo $lableData[$id]['labelid'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
                                     <?php }
                                 }
                             ?>
