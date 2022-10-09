@@ -18,6 +18,10 @@ body {
   color: #8250df;
 }
 
+.text-closed {
+  color: #6e7781;
+}
+
 .link-muted {
   color: #57606a;
 }
