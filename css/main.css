@@ -388,6 +388,11 @@ svg {
   color: white;
 }
 
+.badge-notplanned {
+  background-color: #6e7781;
+  color: white;
+}
+
 .issue-header {
   border-bottom: 1px solid #d0d7de;
   padding-bottom: 8px;
@@ -432,6 +437,39 @@ svg {
 }
 .discussion-card .card-body #close-dropdown {
   transform: translate(-20px, 42px) !important;
+}
+.discussion-card .card-footer {
+  margin-top: 4px;
+  color: #57606a;
+  background: none;
+  border-color: rgba(84, 174, 255, 0.4);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.discussion-card .card-footer:first-child {
+  border: none;
+}
+.discussion-card .card-footer .commit-action-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+  margin-top: -4px;
+  margin-right: 8px;
+}
+.discussion-card .card-footer .commit-action-icon.closed {
+  background-color: #8250df;
+  color: white;
+}
+.discussion-card .card-footer .commit-action-icon.reopened {
+  background-color: #1a7f37;
+  color: white;
+}
+.discussion-card .card-footer .commit-action-icon.notplanned {
+  background-color: #6e7781;
+  color: white;
 }
 
 .path {

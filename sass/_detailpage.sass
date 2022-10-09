@@ -6,6 +6,10 @@
     background-color: $gh-closed
     color: white
 
+.badge-notplanned
+    background-color: $gh-notplanned
+    color: white
+
 .issue-header
     border-bottom: $gh-subnav-border
     padding-bottom: 8px
@@ -49,7 +53,40 @@
 
         #close-dropdown
             transform: translate(-20px, 42px) !important
-    
+        
+    .card-footer
+        margin-top: 4px
+        color: $gh-muted
+        background: none
+        border-color: $gh-accent-muted
+        padding-top: 1rem
+        padding-bottom: 1rem
+
+        &:first-child
+            border: none
+
+        .commit-action-icon
+            width: 32px
+            height: 32px
+            display: flex
+            align-items: center
+            border-radius: 50%
+            justify-content: center
+            margin-top: -4px
+            margin-right: 8px
+
+            &.closed
+                background-color: $gh-closed
+                color: white
+
+            &.reopened
+                background-color: $gh-open
+                color: white
+
+            &.notplanned
+                background-color: $gh-notplanned
+                color: white
+
 .path
     width: 2px
     height: 32px
