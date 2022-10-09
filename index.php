@@ -29,8 +29,11 @@
             }
         }
 
-        // elseif ($endpoit_lvl = 4) {
-        //     // Müsste hinzugefügt werden, wenn es weitere Topic Pages geben soll!
-        // }
+        elseif ($endpoit_lvl == 4) {
+            if ($endpoints[2] == 'issues') {
+                // Issues Detail
+                include 'issue_details.php';
+            }
+        }
     }
 ?>

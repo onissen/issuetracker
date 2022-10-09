@@ -1,0 +1,60 @@
+.badge-open
+    background-color: $gh-open
+    color: white
+
+.badge-closed
+    background-color: $gh-closed
+    color: white
+
+.issue-header
+    border-bottom: $gh-subnav-border
+    padding-bottom: 8px
+    margin-bottom: 32px
+
+.header-meta
+    .label-badge
+        font-size: 14px
+        font-weight: 500
+        line-height: 20px
+        text-align: center
+        padding: 5px 12px
+        margin-bottom: 8px
+    
+    .info
+        a
+            color: black
+
+            &:hover
+                color: #0d6efd
+
+.discussion-card
+    border-color: $gh-accent-muted
+    .card-header
+        margin-left: 0 !important
+        margin-right: 0 !important
+        background-color: $gh-accent
+        border-bottom-color: $gh-accent-muted
+        div
+            padding: 0
+
+        span
+            margin-left: 4px
+    
+    .card-body
+        textarea
+            min-height: 100px
+        
+        .buttons *
+            font-size: 14px
+
+        #close-dropdown
+            transform: translate(-20px, 42px) !important
+    
+.path
+    width: 2px
+    height: 32px
+    margin-left: 16px
+    background-color: $gh-border-muted
+
+    &:last-of-type
+        height: 16px

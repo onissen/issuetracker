@@ -132,17 +132,17 @@
                         </ul>
                     </div>
                     <div class="filterbar-item" id="label">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Label</a>
-                        <ul class="dropdown-menu">
-                            <?php foreach ($result_labels as $label) { ?>
-                                <li>
-                                    <a class="dropdown-item" href="?search=label:<?php echo $label['labelid'] ?>">
-                                        <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
-                                        <span class="text-muted text-small"><?php echo $label['description'] ?></span>
-                                    </a>
-                                </li>
-                            <?php } ?>
-                        </ul>
+                            <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Label</a>
+                            <ul class="dropdown-menu">
+                                <?php foreach ($result_labels as $label) { ?>
+                                    <li>
+                                        <a class="dropdown-item" href="?search=label:<?php echo $label['labelid'] ?>">
+                                            <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
+                                            <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
                     </div>
                     <div class="filterbar-item" id="project">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekte</a>

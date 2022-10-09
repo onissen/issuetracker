@@ -6,6 +6,10 @@ body {
   font-size: 12px;
 }
 
+.wght-light {
+  font-weight: 300;
+}
+
 .text-open {
   color: #1a7f37;
 }
@@ -372,6 +376,72 @@ svg {
   background-color: #F6F8FA;
   border-radius: 6px;
   margin: 0 -12px;
+}
+
+.badge-open {
+  background-color: #1a7f37;
+  color: white;
+}
+
+.badge-closed {
+  background-color: #8250df;
+  color: white;
+}
+
+.issue-header {
+  border-bottom: 1px solid #d0d7de;
+  padding-bottom: 8px;
+  margin-bottom: 32px;
+}
+
+.header-meta .label-badge {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  padding: 5px 12px;
+  margin-bottom: 8px;
+}
+.header-meta .info a {
+  color: black;
+}
+.header-meta .info a:hover {
+  color: #0d6efd;
+}
+
+.discussion-card {
+  border-color: rgba(84, 174, 255, 0.4);
+}
+.discussion-card .card-header {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background-color: #ddf4ff;
+  border-bottom-color: rgba(84, 174, 255, 0.4);
+}
+.discussion-card .card-header div {
+  padding: 0;
+}
+.discussion-card .card-header span {
+  margin-left: 4px;
+}
+.discussion-card .card-body textarea {
+  min-height: 100px;
+}
+.discussion-card .card-body .buttons * {
+  font-size: 14px;
+}
+.discussion-card .card-body #close-dropdown {
+  transform: translate(-20px, 42px) !important;
+}
+
+.path {
+  width: 2px;
+  height: 32px;
+  margin-left: 16px;
+  background-color: #d8dee4;
+}
+.path:last-of-type {
+  height: 16px;
 }
 
 .btn-gh {
