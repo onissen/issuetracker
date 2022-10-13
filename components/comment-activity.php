@@ -78,7 +78,7 @@
             </div>
             <div class="card-body">
                 <form method="post" action="?newComment" id="newcommentForm">
-                    <textarea name="text" id="text-newComment" class="form-control" placeholder="Lasse einen Kommentar da"></textarea>
+                    <textarea name="text" id="text-newComment" class="form-control" placeholder="Lasse einen Kommentar da" onkeyup="enableSubmit()"></textarea>
                     <input type="hidden" id="input-action" name="action" value="comment">
 
                     <div class="buttons text-end my-3">
@@ -168,7 +168,7 @@
                                 </ul>
                             </div>
                         <?php } ?>
-                        <button class="btn btn-success" type="submit">Kommentieren</button><!-- FIXME: disabled wenn keine Inhalte im Textfeld -->
+                        <button class="btn btn-success" type="submit" id="submitNewComment" disabled>Kommentieren</button><!-- FIXME: disabled wenn keine Inhalte im Textfeld -->
                     </div>
                 </form>
             </div>

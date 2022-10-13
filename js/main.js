@@ -103,3 +103,15 @@ function changeStatus(status) {
   document.getElementById('newcommentForm').action = '?commentAction='+status;
   document.getElementById('newcommentForm').submit();
 }
+
+function enableSubmit () {
+  button = document.getElementById('submitNewComment');
+  textarea = document.getElementById('text-newComment');
+  if (textarea.value != '') {
+    button.disabled = false;
+  }
+
+  if (textarea.value == '') {
+    button.disabled = true;
+  }
+}
