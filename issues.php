@@ -10,7 +10,6 @@
 <?php
     $topicid = $info['tpid'];
 
-    // TODO: Hier Label und Milestone Anzahl einfügen
     $sql_averages = "SELECT (SELECT COUNT(id) FROM issues WHERE status = 'open') as issues_open, 
     (SELECT COUNT(id) FROM issues WHERE status = 'closed' OR status = 'notplanned') as issues_closed, 
     (SELECT COUNT(labelid) FROM labels WHERE topicid = $topicid) as average_labels";
