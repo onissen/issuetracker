@@ -151,7 +151,7 @@
             </div>
             <div class="col-md-9 d-flex no-wrap justify-content-between justify-content-sm-start justify-content-lg-end action-menu">
             <div class="filterbar-item" id="sort">
-                <!-- TODO: Suche anwenden -->
+                <!-- TODO: Suche anwenden #22 -->
                 <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sortierung</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">A bis Z</a></li>

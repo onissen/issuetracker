@@ -33,7 +33,7 @@
             </h1>
             <div class="col text-end">
                 <button class="btn btn-gh btn-sm">Bearbeiten</button>
-                <!-- TODO: Onclick Bearbeiten... -->
+                <!-- TODO: Onclick Bearbeiten... #36 -->
                 <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/isssues'.'/new' ?>" class="btn btn-success btn-sm">Neuer Issue</a>
             </div>
         </div>
@@ -83,6 +83,7 @@
         <?php include 'components/comment-activity.php' ?>
         
         <div class="col-3 sidebar">
+            <!-- TODO: Sidebar Items für Verantwortliche und Autor, Labels #36 -->
             <div class="sidebar-item sidebar-itemgroup">
                 <button class="btn btn-link text-small" id="deleteIssue" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -109,9 +110,9 @@
                     <h5 class="mt-4">Bist du sicher, dass du diesen Issue löschen möchtest?</h5>
                     <div class="mx-auto mt-1 mb-4">
                         <ul class="text-start">
-                            <li>Dieser Schritt kann nicht rückgängig gemacht werden</li>
-                            <li>Nur Administratoren können Issues löschen</li>
-                            <li>Das Löschen wird den Issue überall dort entfernen, wo er referenziert wurde</li>
+                            <li>Dieser Schritt kann nicht rückgängig gemacht werden.</li>
+                            <li>Nur Administratoren können Issues löschen.</li>
+                            <li>Diese Aktion wird den Issue, die zugehörigen Commits und alle weiteren Daten überall entfernen.</li>
                         </ul>
                     </div>
                 </div>

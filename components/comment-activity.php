@@ -41,7 +41,7 @@
                     <b><?php echo $comment['author'] ?></b> <span>schrieb am <?php echo $comment['date'] ?></span>
                 </div>
                 <div class="actions col-1 text-end">
-                    <!-- Per "Color Dropdown" -->
+                    <!-- FIXME: Per "Color Dropdown" -->
                 </div>
             </div>
             <div class="card-body">
@@ -168,7 +168,7 @@
                                 </ul>
                             </div>
                         <?php } ?>
-                        <button class="btn btn-success" type="submit" id="submitNewComment" disabled>Kommentieren</button><!-- FIXME: disabled wenn keine Inhalte im Textfeld -->
+                        <button class="btn btn-success" type="submit" id="submitNewComment" disabled>Kommentieren</button>
                     </div>
                 </form>
             </div>
