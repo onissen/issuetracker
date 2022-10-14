@@ -27,6 +27,10 @@
             if (end($endpoints) == 'labels') {
                 include 'labels.php';
             }
+            
+            if (end($endpoints) == 'issues') {
+                include 'issues.php';
+            }
         }
 
         elseif ($endpoit_lvl == 4) {

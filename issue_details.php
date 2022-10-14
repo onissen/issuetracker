@@ -11,6 +11,16 @@
     $issues = $db->query("SELECT issues.* FROM issues WHERE id = $issue_id AND tpid = $topicid")->fetch();
     $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $issue_id; ")->fetchColumn();
     $comments = $db->query("SELECT * FROM comments WHERE issue_id = $issue_id ORDER BY date, issue_id")->fetchAll();
+
+
+    if (isset($_POST['verify_delete']) AND $_POST['verify_delete'] == 1) {
+        $id = $_POST['deleteID'];
+        $sql_delete = "DELETE FROM comments WHERE issue_id = $id; DELETE FROM issues WHERE sql_id = $id";
+        $delete_IssueData = $db->prepare($sql_delete);
+        if ($delete_IssueData->execute()) {
+            echo '<script type="text/JavaScript"> location = "'.$SiteURL.$endpoints[0].'/'.$endpoints[1].'/'.$endpoints[2].'/'.'";</script>';
+        }
+    }
 ?>
 
 
@@ -95,7 +105,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="text-danger">
                     <path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12A9.5 9.5 0 0112 2.5c2.353 0 4.507.856 6.166 2.273L4.773 18.166A9.462 9.462 0 012.5 12zm3.334 7.227A9.462 9.462 0 0012 21.5a9.5 9.5 0 009.5-9.5 9.462 9.462 0 00-2.273-6.166L5.834 19.227z"></path>
                 </svg>
-                <div class="modal-message"> <!-- FIXME: ggf durch <form> tauschen -->
+                <div class="modal-message">
                     <h5 class="mt-4">Bist du sicher, dass du diesen Issue löschen möchtest?</h5>
                     <div class="mx-auto mt-1 mb-4">
                         <ul class="text-start">
@@ -106,7 +116,10 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-danger" name="verify_delete">Diesen Issue <b>löschen</b></button>
+            <form action="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/'.$endpoints[2].'/'.$endpoints[3] ?>" method="post" class="delete-issue">
+                <input type="hidden" name="deleteID" value="<?php echo $issues['sql_id'] ?>">
+                <button type="submit" class="w-100 btn btn-danger" name="verify_delete" value="1">Diesen Issue <b>löschen</b></button>
+            </form>
         </div>
     </div>
 </div>
