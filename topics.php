@@ -13,7 +13,7 @@
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
-    <!-- TODO: Suche nachbauen?! ----->
+    <!-- TODO: globale Suche nachbauen?! #37 ----->
 
     <div class="topic-ul">
         <?php foreach ($result as $topic) { ?>
@@ -33,8 +33,8 @@
                 <div class="topic-description">
                     <p><?php echo $topic['description'] ?></p>
                 </div>
-                <!-- TODO: Tags hinzufügen -->
-                <!-- TODO: "Codesprache"-Tag hinzufügen ?-->
+                <!-- TODO: Tags hinzufügen #37 -->
+                <!-- TODO: "Codesprache"-Tag hinzufügen #37 ?-->
             </div>
         <?php } ?>
     </div>
