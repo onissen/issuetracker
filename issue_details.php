@@ -71,7 +71,43 @@
 
     <div class="discussion-bucket row">
         <?php include 'components/comment-activity.php' ?>
-        <div class="col-3 sidebar">Test</div>
+        
+        <div class="col-3 sidebar">
+            <div class="sidebar-item sidebar-itemgroup">
+                <button class="btn btn-link text-small" id="deleteIssue" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                        <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
+                    </svg>
+                    Issue löschen
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered gh-modal">
+        <div class="modal-content p-3 gh-modal">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="text-danger">
+                    <path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12A9.5 9.5 0 0112 2.5c2.353 0 4.507.856 6.166 2.273L4.773 18.166A9.462 9.462 0 012.5 12zm3.334 7.227A9.462 9.462 0 0012 21.5a9.5 9.5 0 009.5-9.5 9.462 9.462 0 00-2.273-6.166L5.834 19.227z"></path>
+                </svg>
+                <div class="modal-message"> <!-- FIXME: ggf durch <form> tauschen -->
+                    <h5 class="mt-4">Bist du sicher, dass du diesen Issue löschen möchtest?</h5>
+                    <div class="mx-auto mt-1 mb-4">
+                        <ul class="text-start">
+                            <li>Dieser Schritt kann nicht rückgängig gemacht werden</li>
+                            <li>Nur Administratoren können Issues löschen</li>
+                            <li>Das Löschen wird den Issue überall dort entfernen, wo er referenziert wurde</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger" name="verify_delete">Diesen Issue <b>löschen</b></button>
+        </div>
     </div>
 </div>
 

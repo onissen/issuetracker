@@ -486,6 +486,40 @@ svg {
   height: 16px;
 }
 
+.sidebar-item {
+  margin-top: 16px;
+  border-top: 1px solid #d8dee4;
+  font-size: 12px;
+  padding-top: 16px;
+}
+.sidebar-item .btn-link {
+  text-decoration: none;
+  color: #24292f;
+  font-weight: 600;
+}
+.sidebar-item .btn-link:hover {
+  color: #0a58ca;
+}
+
+.gh-modal {
+  max-width: 450px;
+}
+.gh-modal .modal-header {
+  border-bottom: none;
+  padding: 0;
+}
+.gh-modal .modal-header .btn-close {
+  padding: 16px;
+}
+.gh-modal svg {
+  width: 40px;
+  height: 40px;
+}
+.gh-modal h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .btn-gh {
   color: #24292f;
   background-color: #F6F8FA;
