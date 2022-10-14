@@ -1,21 +1,21 @@
 /* jshint esversion:6 */
 
-searchbox = document.querySelector("#searchbox");
-URLRequest = location.search;
-searchbox.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.key === "Enter") {
-      if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
-          if (URLRequest.includes("&search")) {
-              old_search = URLRequest.substring(URLRequest.indexOf("&search"));
-              URLRequest = URLRequest.replace(old_search, ''); // ?filter...
-          }
-          URLRequest += '&search='+searchbox.value;
+// searchbox = document.querySelector("#searchbox");
+// URLRequest = location.search;
+// searchbox.addEventListener("keyup", function(event) {
+//   event.preventDefault();
+//   if (event.key === "Enter") {
+//       if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
+//           if (URLRequest.includes("&search")) {
+//               old_search = URLRequest.substring(URLRequest.indexOf("&search"));
+//               URLRequest = URLRequest.replace(old_search, ''); // ?filter...
+//           }
+//           URLRequest += '&search='+searchbox.value;
 
-      } else {URLRequest = '?search='+searchbox.value;}
-      location.search = URLRequest;
-  }
-});
+//       } else {URLRequest = '?search='+searchbox.value;}
+//       location.search = URLRequest;
+//   }
+// });
 
 function toggleDelete(labelid) {
     if (confirm
@@ -96,4 +96,22 @@ function dynamicPreviewText (id) {
 
   if (text != '') {document.getElementById('badge-color'+id).innerHTML = text;} 
   else {document.getElementById('badge-color'+id).innerHTML = 'Label Vorschau';}
+}
+
+function changeStatus(status) {
+  document.getElementById('input-action').value = status;
+  document.getElementById('newcommentForm').action = '?commentAction='+status;
+  document.getElementById('newcommentForm').submit();
+}
+
+function enableSubmit () {
+  button = document.getElementById('submitNewComment');
+  textarea = document.getElementById('text-newComment');
+  if (textarea.value != '') {
+    button.disabled = false;
+  }
+
+  if (textarea.value == '') {
+    button.disabled = true;
+  }
 }

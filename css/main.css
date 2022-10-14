@@ -6,12 +6,20 @@ body {
   font-size: 12px;
 }
 
+.wght-light {
+  font-weight: 300;
+}
+
 .text-open {
   color: #1a7f37;
 }
 
 .text-closed {
   color: #8250df;
+}
+
+.text-notplanned {
+  color: #6e7781;
 }
 
 .link-muted {
@@ -372,6 +380,144 @@ svg {
   background-color: #F6F8FA;
   border-radius: 6px;
   margin: 0 -12px;
+}
+
+.badge-open {
+  background-color: #1a7f37;
+  color: white;
+}
+
+.badge-closed {
+  background-color: #8250df;
+  color: white;
+}
+
+.badge-notplanned {
+  background-color: #6e7781;
+  color: white;
+}
+
+.issue-header {
+  border-bottom: 1px solid #d0d7de;
+  padding-bottom: 8px;
+  margin-bottom: 32px;
+}
+
+.header-meta .label-badge {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  padding: 5px 12px;
+  margin-bottom: 8px;
+}
+.header-meta .info a {
+  color: black;
+}
+.header-meta .info a:hover {
+  color: #0d6efd;
+}
+
+.discussion-card {
+  border-color: rgba(84, 174, 255, 0.4);
+}
+.discussion-card .card-header {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background-color: #ddf4ff;
+  border-bottom-color: rgba(84, 174, 255, 0.4);
+}
+.discussion-card .card-header div {
+  padding: 0;
+}
+.discussion-card .card-header span {
+  margin-left: 4px;
+}
+.discussion-card .card-body textarea {
+  min-height: 100px;
+}
+.discussion-card .card-body .buttons * {
+  font-size: 14px;
+}
+.discussion-card .card-body #close-dropdown {
+  transform: translate(-20px, 42px) !important;
+}
+.discussion-card .card-footer {
+  margin-top: 4px;
+  color: #57606a;
+  background: none;
+  border-color: rgba(84, 174, 255, 0.4);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.discussion-card .card-footer:first-child {
+  border: none;
+}
+.discussion-card .card-footer .commit-action-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+  margin-top: -4px;
+  margin-right: 8px;
+}
+.discussion-card .card-footer .commit-action-icon.closed {
+  background-color: #8250df;
+  color: white;
+}
+.discussion-card .card-footer .commit-action-icon.reopened {
+  background-color: #1a7f37;
+  color: white;
+}
+.discussion-card .card-footer .commit-action-icon.notplanned {
+  background-color: #6e7781;
+  color: white;
+}
+
+.path {
+  width: 2px;
+  height: 32px;
+  margin-left: 16px;
+  background-color: #d8dee4;
+}
+.path:last-of-type {
+  height: 16px;
+}
+
+.sidebar-item {
+  margin-top: 16px;
+  border-top: 1px solid #d8dee4;
+  font-size: 12px;
+  padding-top: 16px;
+}
+.sidebar-item .btn-link {
+  text-decoration: none;
+  color: #24292f;
+  font-weight: 600;
+}
+.sidebar-item .btn-link:hover {
+  color: #0a58ca;
+}
+
+.gh-modal {
+  max-width: 450px;
+}
+.gh-modal .modal-header {
+  border-bottom: none;
+  padding: 0;
+}
+.gh-modal .modal-header .btn-close {
+  padding: 16px;
+}
+.gh-modal svg {
+  width: 40px;
+  height: 40px;
+}
+.gh-modal h5 {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .btn-gh {
