@@ -8,12 +8,23 @@
         array_splice($endpoints, -1, 1);
     }
     $endpoit_lvl = count($endpoints);
+    echo $endpoit_lvl;
 
 
     if (isset($endpoit_lvl)) {
         if ($endpoit_lvl <= 1) {
-            // Keine Topic gewählt; ggf aber ein Channel
-            include 'topics.php';
+            // Keine Topic gewählt; ggf aber Channel oder New 
+            // FIXME #44
+            if ($endpoints[0] == 'newTopic') {
+                // Neues Thema
+                include 'new_topic.php';
+            } elseif ($endpoints[0] == 'newChannel') {
+                // Neues Thema
+                include 'new_channel.php';
+            } else {
+                include 'topics.php';
+            }
+            
         }
 
         elseif ($endpoit_lvl == 2) {
