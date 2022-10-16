@@ -2,6 +2,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.border-bottom-muted {
+  border-bottom: 1px solid #d8dee4;
+}
+
 .text-small {
   font-size: 12px;
 }
@@ -78,8 +82,7 @@ svg {
 
 .label-muted-outline {
   color: #57606a;
-  border-color: #d0d7de;
-  border: 1px solid;
+  border: 1px solid #d0d7de;
   font-size: 12px;
   font-weight: 500;
   margin-left: 8px;
@@ -164,6 +167,24 @@ svg {
   margin-bottom: 8px;
   color: #57606a;
   font-size: 14px;
+}
+
+.topic-devider {
+  font-size: 24px;
+  margin-bottom: 15px;
+  margin-top: 44px;
+}
+
+#newChannelName {
+  display: none;
+}
+
+.form-group, .form-check {
+  margin: 15px 0;
+}
+.form-group .form-label, .form-group .form-check-label, .form-check .form-label, .form-check .form-check-label {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .searchbar .querybox {

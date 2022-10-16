@@ -115,3 +115,8 @@ function enableSubmit () {
     button.disabled = true;
   }
 }
+
+function toggleNewChannel() {
+  document.getElementById('newChannelName').style.display = 'block';
+  // document.getElementById('selectChannel').disabled = true;
+}
