@@ -24,28 +24,27 @@
         $topic = $_POST['topic'];
         $description = $_POST['description'];
         $visibility = $_POST['visibility'];
-        // FIXME: Features fehlen in der Datenbank noch
+        $feature_issues = $_POST['feature_issues'];
 
-        $sql_newTopic = "INSERT INTO topics(chid, topic, visibility, description) VALUES ($chid, '$topic', '$visibility', '$description')";
+        $sql_newTopic = "INSERT INTO topics(chid, topic, visibility, description, feature_issues) VALUES ($chid, '$topic', '$visibility', '$description', $feature_issues)";
         $stmt_newTopic = $db->prepare($sql_newTopic);
         if ($stmt_newTopic->execute()) {
             echo '<script type="text/JavaScript"> location = "'.$SiteURL.'";</script>';
         }
     }
-    print_r($_POST);
-    print_r($db->errorInfo());
 ?>
 
 <div class="container-lg container-md mt-5">
     <div class="headline pb-2 mb-3 border-bottom-muted">
         <h2>Neues Thema erstellen</h2>
     </div>
-    <form method="post">
+    <form method="post" autocomplete="off">
         <div class="topic-name mb-2 pb-2 border-bottom-muted">
             <div class="d-flex">
                 <div class="form-group">
                     <label for="selectChannel" class="form-label">Kanal</label>
                     <select name="chid" id="selectChannel" class="form-select form-select-sm">
+                        <option value="">Kanal wählen</option>
                         <?php foreach ($sql_channels as $channel) { ?>
                             <option value="<?php echo $channel['chid'] ?>"><?php echo $channel['channel'] ?></option>
                         <?php } ?>
@@ -82,11 +81,11 @@
         <div class="py-3 topic-features border-bottom-muted">
             <h5>Das Thema mit Features ausstatten</h5>
             <div class="form-check">
-                <input id="checkIssues" value="issues" type="checkbox" name="features" class="form-check-input" checked>
+                <input id="checkIssues" type="checkbox" name="feature_issues" class="form-check-input" value="true" checked>
                 <label for="checkIssues" class="form-check-label">Issues</label>
             </div>
             <!-- <div class="form-check">
-                <input id="checkProjects" value="projects" type="checkbox" name="features" class="form-check-input">
+                <input id="checkProjects" type="checkbox" name="features" class="form-check-input" value="true">
                 <label for="checkProjects" class="form-check-label">Projects</label>
             </div> -->
             <!-- TODO: Einblenden wenn Projekte/Idea-Boards eingebaut sind; ggf. weitere hinzufügen -->
