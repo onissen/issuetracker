@@ -115,3 +115,17 @@ function enableSubmit () {
     button.disabled = true;
   }
 }
+
+function toggleNewChannel() {
+  document.getElementById('newChannelName').style.display = 'block';
+  console.log('New Channel Toggle');
+}
+
+function confirmDangerZone(index,confirmationText) {
+  btn = document.getElementById('submit'+index);
+  input = document.getElementById('confirm'+index);
+
+  if (input.value == confirmationText) {
+    btn.disabled = false;
+  }
+}

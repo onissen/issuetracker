@@ -9,11 +9,20 @@
     }
     $endpoit_lvl = count($endpoints);
 
-
     if (isset($endpoit_lvl)) {
         if ($endpoit_lvl <= 1) {
-            // Keine Topic gewählt; ggf aber ein Channel
-            include 'topics.php';
+            // Keine Topic gewählt; ggf aber Channel oder New 
+            // FIXME #44
+            if ($endpoints[0] == 'newTopic') {
+                // Neues Thema
+                include 'new_topic.php';
+            // } elseif ($endpoints[0] == 'newChannel') {
+            //     // Neues Thema
+            //     include 'new_channel.php';
+            } else {
+                include 'topics.php';
+            }
+            
         }
 
         elseif ($endpoit_lvl == 2) {
@@ -24,13 +33,18 @@
 
         elseif ($endpoit_lvl == 3) {
             // Unterseiten der Repo
-            if (end($endpoints) == 'labels') {
-                include 'labels.php';
-            }
-            
             if (end($endpoints) == 'issues') {
                 include 'issues.php';
             }
+
+            if (end($endpoints) == 'labels') {
+                include 'labels.php';
+            }
+
+            if (end($endpoints) == 'settings') {
+                include 'topic_settings.php';
+            }
+            
         }
 
         elseif ($endpoit_lvl == 4) {

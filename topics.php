@@ -13,7 +13,36 @@
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
-    <!-- TODO: globale Suche nachbauen?! #37 ----->
+    <div class="topic-filter d-flex align-items-start">
+        <!-- TODO: Suche nach allen Themen #43 ----->
+        <div class="d-flex flex-wrap text-end" id="topic-filter-dropdown">
+            <button type="button" class="btn btn-gh me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Typ
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Öffentlich</button></li>
+                <li><button class="dropdown-item" type="button">Angemeldet</button></li>
+                <!-- TODO: und weitere #39  -->
+            </ul>
+            <button type="button" class="btn btn-gh dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Sortierung
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Zuletzt aktualisiert</button></li>
+                <li><button class="dropdown-item" type="button">Name</button></li>
+            </ul>
+        </div>
+        <div class="d-md-flex flex-md-items-center flex-md-justify-end">
+            <a href="<?php echo $SiteURL ?>newTopic" class="btn btn-primary ms-3">
+                Neues Thema
+            </a>
+            <!-- Wird ggf nichtmehr hier verlinkt
+                 FIXME: If Higher Authenticated or Admin #33
+            <a href="<?php echo $SiteURL ?>newChannel" class="btn btn-primary ms-1">
+                Neuer Channel
+            </a> -->
+        </div>
+    </div>
 
     <div class="topic-ul">
         <?php foreach ($result as $topic) { ?>
@@ -40,3 +69,4 @@
     </div>
 
 </div>
+<?php require 'components/footer.php' ?>
