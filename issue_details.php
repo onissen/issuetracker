@@ -44,9 +44,9 @@
                 <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/isssues'.'/new' ?>" class="btn btn-success btn-sm">Neuer Issue</a>
             </div>
         </div>
-        <div class="issue-title-edit pb-3">
-            <form action="" class="row" method="post">
-                <div class="col-10 col-md-10 col-sm-12">
+        <div class="issue-title-edit pb-3 row">
+            <form action="" method="post" class="row">
+                <div class="col-9 col-md-9 col-sm-12">
                     <input type="text" class="form-control" value="<?php echo $issues['title'] ?>" autofocus="autofocus" autocomplete="off" name="editTitle">
                 </div>
                 <div class="col-2 col-md-2 col-sm-12 text-end">

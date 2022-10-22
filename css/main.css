@@ -2,6 +2,39 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 600;
+}
+
+h1, .h1, .f1 {
+  font-size: 32px !important;
+}
+
+h2, .h2, .f2 {
+  font-size: 24px !important;
+}
+
+h3, .h3, .f3 {
+  font-size: 20px !important;
+}
+
+h4, .h4, .f4 {
+  font-size: 16px !important;
+}
+
+h5, .h5, .f5 {
+  font-size: 14px !important;
+}
+
+h6, .h6, .f6 {
+  font-size: 12px !important;
+}
+
+.border-bottom-muted {
+  border-bottom: 1px solid #d8dee4;
+}
+
 .text-small {
   font-size: 12px;
 }
@@ -78,8 +111,7 @@ svg {
 
 .label-muted-outline {
   color: #57606a;
-  border-color: #d0d7de;
-  border: 1px solid;
+  border: 1px solid #d0d7de;
   font-size: 12px;
   font-weight: 500;
   margin-left: 8px;
@@ -110,6 +142,11 @@ svg {
 .topic-nav .nav-link svg {
   fill: currentcolor;
   margin-right: 8px;
+}
+
+.topic-filter {
+  border-bottom: 1px solid #d8dee4;
+  padding: 16px 0;
 }
 
 .card {
@@ -159,6 +196,24 @@ svg {
   margin-bottom: 8px;
   color: #57606a;
   font-size: 14px;
+}
+
+.topic-devider {
+  font-size: 24px;
+  margin-bottom: 15px;
+  margin-top: 44px;
+}
+
+#newChannelName {
+  display: none;
+}
+
+.form-group, .form-check {
+  margin: 15px 0;
+}
+.form-group .form-label, .form-group .form-check-label, .form-check .form-label, .form-check .form-check-label {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .searchbar .querybox {
@@ -524,6 +579,33 @@ svg {
   font-weight: 600;
 }
 
+.options-bucket > div {
+  margin-top: 40px;
+}
+
+.list-group-button {
+  background-color: #0d6efd;
+  color: white;
+}
+.list-group-button:hover {
+  background-color: #0b5de7;
+}
+.list-group-button .btn-link {
+  color: white;
+  text-decoration: none;
+}
+.list-group-button .btn-link :hover {
+  text-decoration: none;
+}
+
+.list-group-danger {
+  border-color: #dc3545;
+}
+
+#input-wrapper-newChannel {
+  display: none;
+}
+
 .btn-gh {
   color: #24292f;
   background-color: #F6F8FA;
@@ -532,6 +614,10 @@ svg {
 .btn-gh:hover {
   background-color: #F3F4F6;
   border: 1px solid #d0d7de;
+}
+.btn-gh:active, .btn-gh:focus {
+  background-color: #ebecf0;
+  border-color: rgba(27, 31, 36, 0.15);
 }
 
 /*# sourceMappingURL=main.css.map */

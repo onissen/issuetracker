@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="<?php echo $SiteURL ?>/assets/favicon.svg" type="image/x-icon">
     <title><?php if(isset($siteTitle)){echo $siteTitle;} else {echo 'Issue Tracker';} ?></title>
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $SiteURL ?>/fonts/octicons/octicons.css">
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/css/main.css">
 </head>
 <body>

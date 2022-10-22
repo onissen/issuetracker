@@ -1,21 +1,21 @@
 /* jshint esversion:6 */
 
-searchbox = document.querySelector("#searchbox");
-URLRequest = location.search;
-searchbox.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.key === "Enter") {
-      if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
-          if (URLRequest.includes("&search")) {
-              old_search = URLRequest.substring(URLRequest.indexOf("&search"));
-              URLRequest = URLRequest.replace(old_search, ''); // ?filter...
-          }
-          URLRequest += '&search='+searchbox.value;
+// searchbox = document.querySelector("#searchbox");
+// URLRequest = location.search;
+// searchbox.addEventListener("keyup", function(event) {
+//   event.preventDefault();
+//   if (event.key === "Enter") {
+//       if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
+//           if (URLRequest.includes("&search")) {
+//               old_search = URLRequest.substring(URLRequest.indexOf("&search"));
+//               URLRequest = URLRequest.replace(old_search, ''); // ?filter...
+//           }
+//           URLRequest += '&search='+searchbox.value;
 
-      } else {URLRequest = '?search='+searchbox.value;}
-      location.search = URLRequest;
-  }
-});
+//       } else {URLRequest = '?search='+searchbox.value;}
+//       location.search = URLRequest;
+//   }
+// });
 
 function toggleDelete(labelid) {
     if (confirm
@@ -120,7 +120,7 @@ function toggleIssueHeader (action) {
   if (action == 'edit') {
     // Bearbeiten: Titel verstecken, Input zeigen
     document.querySelector('.issue-title-show').style.display = "none";
-    document.querySelector('.issue-title-edit').style.display = "block";
+    document.querySelector('.issue-title-edit').style.display = "flex";
   }
 
   if (action == 'show') {
@@ -128,4 +128,29 @@ function toggleIssueHeader (action) {
     document.querySelector('.issue-title-show').style.display = "flex";
     document.querySelector('.issue-title-edit').style.display = "none";
   }
+}
+
+function confirmDangerZone(index,confirmationText) {
+  btn = document.getElementById('submit'+index);
+  input = document.getElementById('confirm'+index);
+
+  if (input.value == confirmationText) {
+    btn.disabled = false;
+  }
+}
+
+function toggleNewChannel(value) {
+  // Neuer Channel in new-topic.php
+  if (value == 'newChannel') {document.getElementById('newChannelName').style.display = 'block';} 
+  else {document.getElementById('newChannelName').style.display = 'none';}
+}
+
+function toggleNewChannelWrapper() {
+  // Neuer Channel in topic-settings.php
+  document.getElementById('input-wrapper-newChannel').style.display = 'block';
+}
+
+function untoggleNewChannelWrapper() {
+  // Neuer Channel in topic-settings.php VERBERGEN
+  document.getElementById('input-wrapper-newChannel').style.display = 'none';
 }
