@@ -140,6 +140,17 @@ function confirmDangerZone(index,confirmationText) {
 }
 
 function toggleNewChannel(value) {
+  // Neuer Channel in new-topic.php
   if (value == 'newChannel') {document.getElementById('newChannelName').style.display = 'block';} 
   else {document.getElementById('newChannelName').style.display = 'none';}
+}
+
+function toggleNewChannelWrapper() {
+  // Neuer Channel in topic-settings.php
+  document.getElementById('input-wrapper-newChannel').style.display = 'block';
+}
+
+function untoggleNewChannelWrapper() {
+  // Neuer Channel in topic-settings.php VERBERGEN
+  document.getElementById('input-wrapper-newChannel').style.display = 'none';
 }

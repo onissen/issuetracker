@@ -57,9 +57,19 @@
         
         if ($confirm == $testText) {
             $id = $info['tpid'];
-            $channelText = explode(',,', $_POST['channel']);
-            $chid = $channelText[0];
-            $newChannel = $channelText[1];
+            if ($_POST['channel'] != 'New') {
+                $channelText = explode(',,', $_POST['channel']);
+                $chid = $channelText[0];
+                $newChannel = $channelText[1];
+            } elseif($_POST['channel'] == 'New') {
+                $channel = $_POST['newChannel'];
+                $newChannelEntry = $db->prepare("INSERT INTO channels (channel) VALUES('$channel')");
+                $newChannelEntry->execute();
+                
+                $channelText = $db->query("SELECT chid, channel FROM channels WHERE channel = '$channel'")->fetch();
+                $chid = $channelText[0];
+                $newChannel = $channelText[1];
+            }
 
             $changeChannel = $db->prepare("UPDATE topics SET chid = $chid WHERE tpid = $id");
             if ($changeChannel->execute()) {
@@ -203,11 +213,23 @@
                                             <ul class="list-group" id="list-group-channels">
                                                 <?php foreach ($channels as $channel) { ?>
                                                     <li class="list-group-item">
-                                                        <input class="form-check-input me-1" id="<?php echo 'radio'.$channel['chid'] ?>" type="radio" name="channel" value="<?php echo $channel['chid'].',,'.$channel['channel'] ?>" <?php if($channel['chid'] == $info['chid']) {echo 'checked';} ?>>
-                                                        <label class="form-check-label" for="firstRadio"><?php echo $channel['channel'] ?></label>
+                                                        <input class="form-check-input me-1" id="<?php echo 'radio'.$channel['chid'] ?>" type="radio" name="channel" value="<?php echo $channel['chid'].',,'.$channel['channel'] ?>" <?php if($channel['chid'] == $info['chid']) {echo 'checked';} ?> onchange="untoggleNewChannelWrapper()">
+                                                        <label class="form-check-label" for="<?php echo 'radio'.$channel['chid'] ?>"><?php echo $channel['channel'] ?></label>
                                                     </li>
                                                 <?php } ?>
                                             </ul>
+                                            <div class="list-group mt-3">
+                                                <div class="list-group-item">
+                                                    <div class="radioGroup-toggleNew">
+                                                        <input class="form-check-input me-1" id="radioNew" type="radio" name="channel" value="New" onchange="toggleNewChannelWrapper()">
+                                                        <label class="form-check-label" for="NewChannel">Neuen Kanal anlegen</label>
+                                                    </div>
+                                                    <div class="form-group" id="input-wrapper-newChannel">
+                                                        <label for="inputNewChannelName" class="form-label h5">Neuer Kanalname</label>
+                                                        <input type="text" class="form-control form-control-sm" id="inputNewChannelName" name="newChannel">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer justify-content-center">
                                             <label for="confirmChannel">Bitte schreibe <b><?php echo $info['channel'].'/'.$info['topic'] ?></b> zur Bestätigung</label>

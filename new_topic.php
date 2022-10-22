@@ -48,7 +48,7 @@
                         <?php foreach ($sql_channels as $channel) { ?>
                             <option value="<?php echo $channel['chid'] ?>"><?php echo $channel['channel'] ?></option>
                         <?php } ?>
-                        <option value="newChannel" class="toggleNewChannel">Neurr Kanal</option>
+                        <option value="newChannel" class="toggleNewChannel">Neuer Kanal</option>
                     </select>
                 </div>
                 <span class="mx-2 topic-devider">/</span>
