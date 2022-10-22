@@ -43,12 +43,12 @@
             <div class="d-flex">
                 <div class="form-group">
                     <label for="selectChannel" class="form-label">Kanal</label>
-                    <select name="chid" id="selectChannel" class="form-select form-select-sm">
+                    <select name="chid" id="selectChannel" class="form-select form-select-sm" onchange="toggleNewChannel(value)">
                         <option value="">Kanal wählen</option>
                         <?php foreach ($sql_channels as $channel) { ?>
                             <option value="<?php echo $channel['chid'] ?>"><?php echo $channel['channel'] ?></option>
                         <?php } ?>
-                        <option value="newChannel" onclick="toggleNewChannel()" class="toggleNewChannel">Neuer Channel</option>
+                        <option value="newChannel" class="toggleNewChannel">Neurr Kanal</option>
                     </select>
                 </div>
                 <span class="mx-2 topic-devider">/</span>

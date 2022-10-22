@@ -1,21 +1,21 @@
 /* jshint esversion:6 */
 
-searchbox = document.querySelector("#searchbox");
-URLRequest = location.search;
-searchbox.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.key === "Enter") {
-      if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
-          if (URLRequest.includes("&search")) {
-              old_search = URLRequest.substring(URLRequest.indexOf("&search"));
-              URLRequest = URLRequest.replace(old_search, ''); // ?filter...
-          }
-          URLRequest += '&search='+searchbox.value;
+// searchbox = document.querySelector("#searchbox");
+// URLRequest = location.search;
+// searchbox.addEventListener("keyup", function(event) {
+//   event.preventDefault();
+//   if (event.key === "Enter") {
+//       if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
+//           if (URLRequest.includes("&search")) {
+//               old_search = URLRequest.substring(URLRequest.indexOf("&search"));
+//               URLRequest = URLRequest.replace(old_search, ''); // ?filter...
+//           }
+//           URLRequest += '&search='+searchbox.value;
 
-      } else {URLRequest = '?search='+searchbox.value;}
-      location.search = URLRequest;
-  }
-});
+//       } else {URLRequest = '?search='+searchbox.value;}
+//       location.search = URLRequest;
+//   }
+// });
 
 function toggleDelete(labelid) {
     if (confirm
@@ -130,11 +130,6 @@ function toggleIssueHeader (action) {
   }
 }
 
-function toggleNewChannel() {
-  document.getElementById('newChannelName').style.display = 'block';
-  console.log('New Channel Toggle');
-}
-
 function confirmDangerZone(index,confirmationText) {
   btn = document.getElementById('submit'+index);
   input = document.getElementById('confirm'+index);
@@ -142,4 +137,9 @@ function confirmDangerZone(index,confirmationText) {
   if (input.value == confirmationText) {
     btn.disabled = false;
   }
+}
+
+function toggleNewChannel(value) {
+  if (value == 'newChannel') {document.getElementById('newChannelName').style.display = 'block';} 
+  else {document.getElementById('newChannelName').style.display = 'none';}
 }
