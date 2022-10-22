@@ -143,6 +143,17 @@ svg {
   fill: currentcolor;
   margin-right: 8px;
 }
+.topic-nav .nav-link .badge {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #0d6efd;
+  margin-left: 3px;
+}
+.topic-nav .nav-link:hover .badge, .topic-nav .nav-link:focus .badge {
+  color: #0a58ca;
+}
+.topic-nav .nav-link.active .badge {
+  color: white;
+}
 
 .topic-filter {
   border-bottom: 1px solid #d8dee4;

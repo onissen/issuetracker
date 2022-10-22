@@ -4,6 +4,10 @@
     $result = $db->prepare($sql);
     $result->execute();
     $info = $result->fetch();
+
+    $tpid = $info['tpid'];
+
+    $navAmounts = $db->query("SELECT COUNT(id) AS issues_nav FROM issues WHERE status = 'open' AND tpid = $tpid")->fetch();
 ?>
 
 <?php if (isset($info)) {?>
@@ -29,6 +33,9 @@
                             <path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
                         </svg>
                         Issues
+                        <?php if($navAmounts['issues_nav'] >= 1) { ?>
+                            <span class="badge rounded-pill"><?php echo $navAmounts['issues_nav'] ?></span>
+                        <?php } ?>
                     </a>
                 </li>
                 <li class="nav-item">

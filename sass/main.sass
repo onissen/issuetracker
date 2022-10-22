@@ -119,6 +119,20 @@ svg
         svg
             fill: currentcolor
             margin-right: 8px
+        
+        .badge
+            background-color: rgba(0,0,0,0.1)
+            color: #0d6efd
+            margin-left: 3px
+
+        &:hover .badge, &:focus .badge
+            color: #0a58ca
+            
+
+        &.active .badge
+            color: white
+        
+
 
 @import topics
 @import issuelist
@@ -138,5 +152,3 @@ svg
     &:active, &:focus
         background-color: hsla(220, 14%, 93%, 1)
         border-color: rgba(27, 31, 36, 0.15)
-
-    
