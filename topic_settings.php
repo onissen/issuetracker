@@ -143,8 +143,8 @@
                     <div class="flex-md-order-1 flex-order-2">
                         <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#visibilityModal">Sichtbarkeit ändern</button>
                         <div class="modal fade" id="visibilityModal" aria-labelledby="visibilityModalLabel" aria-hidden="true" tabindex="-1">
-                            <form method="post">
-                                <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form method="post">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title h5" id="visibilityModalLabel">Sichtbarkeit des Themas ändern</h1>
@@ -177,8 +177,8 @@
                                             <button type="submit" name="submitVisibility" id="submitVisibility" class="btn btn-danger w-100" disabled>Ich weiß was ich tue, ändere die Sichtbarkeit</button>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -192,8 +192,8 @@
                     <div class="flex-md-order-1 flex-order-2">
                         <button class="btn btn-outline-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#channelModal">Kanal ändern</button>
                         <div class="modal fade" id="channelModal" aria-labelledby="channelModalLabel" aria-hidden="true" tabindex="-1">
-                            <form method="post">
-                                <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form method="post">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title h5" id="channelModalLabel">In anderen Kanal verschieben</h1>
@@ -216,8 +216,8 @@
                                             <button type="submit" name="submitChannel" id="submitChannel" class="btn btn-danger w-100" disabled>Ich weiß was ich tue, verschiebe das Thema</button>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,8 +231,8 @@
                     <div class="flex-md-order-1 flex-order-2">
                         <button class="btn btn-outline-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#delteModal">Dieses Thema löschen</button>
                         <div class="modal fade" id="delteModal" aria-labelledby="delteModalLabel" aria-hidden="true" tabindex="-1">
-                            <form method="post">
-                                <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form method="post">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title h5" id="delteModalLabel">Bist du wirklich sicher?</h1>
@@ -254,8 +254,8 @@
                                             <button type="submit" name="submitDelete" id="submitDelete" class="btn btn-danger w-100" disabled>Ich weiß was ich tue, bitte lösche das Repository</button>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                 </div>
             </div>
