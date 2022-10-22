@@ -120,7 +120,7 @@ function toggleIssueHeader (action) {
   if (action == 'edit') {
     // Bearbeiten: Titel verstecken, Input zeigen
     document.querySelector('.issue-title-show').style.display = "none";
-    document.querySelector('.issue-title-edit').style.display = "block";
+    document.querySelector('.issue-title-edit').style.display = "flex";
   }
 
   if (action == 'show') {
