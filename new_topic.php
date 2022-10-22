@@ -54,7 +54,7 @@
                 <span class="mx-2 topic-devider">/</span>
                 <div class="form-group col-sm-6">
                     <label for="inputTopicName" class="form-label form-label-sm">Thema</label>
-                    <input type="text" name="topic" id="inputTopicName" class="form-control form-control-sm">
+                    <input type="text" name="topic" id="inputTopicName" class="form-control form-control-sm" max-length="100">
                 </div>
             </div>
             <div class="form-group mt-3 col-5" id="newChannelName">

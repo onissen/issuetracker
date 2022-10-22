@@ -33,13 +33,18 @@
 
         elseif ($endpoit_lvl == 3) {
             // Unterseiten der Repo
-            if (end($endpoints) == 'labels') {
-                include 'labels.php';
-            }
-            
             if (end($endpoints) == 'issues') {
                 include 'issues.php';
             }
+
+            if (end($endpoints) == 'labels') {
+                include 'labels.php';
+            }
+
+            if (end($endpoints) == 'settings') {
+                include 'topic_settings.php';
+            }
+            
         }
 
         elseif ($endpoit_lvl == 4) {
