@@ -12,6 +12,14 @@
     $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $issue_id; ")->fetchColumn();
     $comments = $db->query("SELECT * FROM comments WHERE issue_id = $issue_id ORDER BY date, issue_id")->fetchAll();
 
+    if (isset($_POST['editTitle'])) {
+        $id = $issues['sql_id'];
+        $title = $_POST['editTitle'];
+        $edit = $db->prepare("UPDATE issues SET title = '$title' WHERE sql_id = $id");
+        if ($edit->execute()) {
+            header("Refresh:0");
+        }
+    }
 
     if (isset($_POST['verify_delete']) AND $_POST['verify_delete'] == 1) {
         $id = $_POST['deleteID'];
@@ -26,16 +34,26 @@
 
 <div class="container container-xl my-4">
     <div class="issue-header">
-        <div class="row">
+        <div class="row issue-title-show">
             <h1 class="issue-headline col">
                 <span class="title"><?php echo $issues['title'] ?></span>
                 <span class="wght-light id">#<?php echo $issues['id'] ?></span>
             </h1>
             <div class="col text-end">
-                <button class="btn btn-gh btn-sm">Bearbeiten</button>
-                <!-- TODO: Onclick Bearbeiten... #36 -->
+                <button class="btn btn-gh btn-sm" onclick="toggleIssueHeader('edit')">Bearbeiten</button>
                 <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/isssues'.'/new' ?>" class="btn btn-success btn-sm">Neuer Issue</a>
             </div>
+        </div>
+        <div class="issue-title-edit pb-3">
+            <form action="" class="row" method="post">
+                <div class="col-10 col-md-10 col-sm-12">
+                    <input type="text" class="form-control" value="<?php echo $issues['title'] ?>" autofocus="autofocus" autocomplete="off" name="editTitle">
+                </div>
+                <div class="col-2 col-md-2 col-sm-12 text-end">
+                    <button type="submit" class="btn btn-gh me-2">Speichern</button>
+                    <button type="button" class="btn-link btn" onclick="toggleIssueHeader('show')">Cancel</button>
+                </div>
+            </form>
         </div>
         <div class="header-meta">
             <?php if ($issues['status'] == 'open') { ?>
@@ -75,7 +93,7 @@
                 <?php } else { ?>
                     Von <b><a href="" class="author"><?php echo $issues['author'] ?></a></b>, eröffnet am <?php echo $issues['date_opened']; ?> | <?php echo $coment_average ?> Beiträge
                 <?php } ?>
-                </span>
+            </span>
         </div>
     </div>
 
@@ -124,5 +142,5 @@
         </div>
     </div>
 </div>
-
+<?php print_r($_POST) ?>
 <?php require 'components/footer.php' ?>

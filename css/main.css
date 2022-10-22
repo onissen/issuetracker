@@ -457,6 +457,9 @@ svg {
   padding-bottom: 8px;
   margin-bottom: 32px;
 }
+.issue-header .issue-title-edit {
+  display: none;
+}
 
 .header-meta .label-badge {
   font-size: 14px;
@@ -465,6 +468,7 @@ svg {
   text-align: center;
   padding: 5px 12px;
   margin-bottom: 8px;
+  margin-right: 8px;
 }
 .header-meta .info a {
   color: black;
