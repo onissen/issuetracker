@@ -36,6 +36,12 @@ function toggleColorPicker(id) {
   document.getElementById('popover-color'+id).style.visibility = 'visible';
 }
 
+function toggleCommentMenu(id) {
+  console.log('click');
+  popover = document.getElementById('commentMenu'+id);
+  popover.classList.toggle('hideCommentMenu');
+}
+
 function chooseColor(color, id) {
   document.getElementById('input-color'+id).value = color;
   document.getElementById('popover-color'+id).style.visibility = 'hidden';

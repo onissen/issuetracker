@@ -546,6 +546,49 @@ svg {
   color: white;
 }
 
+.menu-popover {
+  position: absolute;
+  z-index: 100;
+  right: -4px;
+}
+.menu-popover.hideCommentMenu {
+  visibility: hidden;
+}
+.menu-popover .popover-message {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 185px;
+  background-color: white;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+.menu-popover .popover-message-bottom-left {
+  margin-left: 0;
+}
+
+.commentDropdown {
+  padding: 4px 0 !important;
+}
+.commentDropdown .menuItem {
+  color: black;
+  width: 100%;
+  padding: 4px 8px 4px 16px !important;
+}
+.commentDropdown .menuItem:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #0a58ca;
+  color: white;
+}
+.commentDropdown .menuItem.menuItem-danger {
+  color: #dc3545;
+}
+.commentDropdown .menuItem.menuItem-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
 .path {
   width: 2px;
   height: 32px;

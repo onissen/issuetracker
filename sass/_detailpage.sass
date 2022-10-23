@@ -92,6 +92,48 @@
                 background-color: $gh-notplanned
                 color: white
 
+.menu-popover 
+    position: absolute
+    z-index: 100
+    right: -4px
+
+    &.hideCommentMenu
+        visibility: hidden
+        
+
+    .popover-message
+        position: relative
+        margin-right: auto
+        margin-left: auto
+        width: 185px
+        background-color: white
+        border: $gh-border
+        border-radius: 6px
+
+    .popover-message-bottom-left
+        margin-left: 0
+
+.commentDropdown
+    padding: 4px 0 !important
+
+    .menuItem
+        color: black
+        width: 100%
+        padding: 4px 8px 4px 16px !important
+    
+        &:hover
+            text-decoration: none
+            cursor: pointer
+            background-color: #0a58ca
+            color: white
+
+        &.menuItem-danger
+            color: #dc3545
+
+            &:hover
+                background-color: #dc3545
+                color: white
+
 .path
     width: 2px
     height: 32px

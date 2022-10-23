@@ -41,7 +41,21 @@
                     <b><?php echo $comment['author'] ?></b> <span>schrieb am <?php echo $comment['date'] ?></span>
                 </div>
                 <div class="actions col-1 text-end">
-                    <!-- FIXME: Per "Color Dropdown" -->
+                    <div class="position-relative flex-1">
+                        <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                            </svg>
+                        </a>
+                        <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
+                            <div class="popover-message shadow-lg">
+                                <div class="commentDropdown text-start">
+                                    <div class="menuItem"><a>Bearbeiten</a></div>
+                                    <div class="menuItem menuItem-danger"><a>Löschen</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
