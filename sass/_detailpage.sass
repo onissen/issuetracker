@@ -100,7 +100,11 @@
     z-index: 100
     right: -4px
 
-    &.hideCommentMenu
+    &.sidebarMenu-popover
+        top: 30px
+        margin: 4px 0 20px
+
+    &.hideCommentMenu, &.hideSidebarMenu
         visibility: hidden
         
 
@@ -160,6 +164,10 @@
         &:hover
             color: #0a58ca
 
+    .sidebar-heading:hover
+        color: #0a58ca
+        cursor: pointer
+
 .gh-modal
     max-width: 450px
     
@@ -180,3 +188,15 @@
 
 .editCommentForm
     display: none
+
+// Sidebar
+.menu-item
+    padding: 8px
+
+    &:hover
+        background-color: #e9ecef
+        cursor: pointer
+
+    .form-check-input
+        margin: 0
+        margin-right: 8px

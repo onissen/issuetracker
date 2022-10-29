@@ -195,3 +195,13 @@ function toggleEditCommit(id, mode) {
     }
   }
 }
+
+function toggleSidebarPopover(menu) {
+  popover = document.getElementById(menu+'-sidebarPopover');
+  popover.classList.toggle('hideSidebarMenu');
+}
+
+function toggleCheck(id) {
+  checkbox = document.getElementById('label'+id);
+  checkbox.checked = !checkbox.checked;
+}
