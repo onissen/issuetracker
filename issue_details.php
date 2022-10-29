@@ -142,5 +142,4 @@
         </div>
     </div>
 </div>
-<?php print_r($_POST) ?>
 <?php require 'components/footer.php' ?>

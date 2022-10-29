@@ -51,6 +51,15 @@
             echo '<script type="text/JavaScript"> location.search = "";</script>';
         }
     }
+
+    if (isset($_GET['editComment'])) {
+        $id = $_GET['editComment'];
+        $text = $_POST['text'];
+        $editComment = $db->prepare("UPDATE comments SET text = '$text' WHERE sql_id = $id");
+        if ($editComment->execute()) {
+            echo '<script type="text/JavaScript"> location.search = "";</script>';
+        }
+    }
 ?>
 
 
