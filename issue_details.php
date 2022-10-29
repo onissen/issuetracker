@@ -13,6 +13,8 @@
     $comments = $db->query("SELECT * FROM comments WHERE issue_id = $issue_id ORDER BY date, issue_id")->fetchAll();
     $labels = $db->query("SELECT * FROM labels WHERE topicid = $topicid ORDER BY labelid")->fetchAll();
 
+    $currentLabels = explode('..', $issues['label']);
+
     if (isset($_POST['editTitle'])) {
         $id = $issues['sql_id'];
         $title = $_POST['editTitle'];
@@ -133,17 +135,24 @@
                         <form class="popover-message shadow-lg" method="post" action="?setLabel">
                             <?php foreach($labels as $label) { ?>
                             <div class="menu-item d-flex" onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
-                                <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>">
+                                <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>" <?php if(in_array($label['labelid'], $currentLabels)) {echo 'checked';} ?> onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
                                 <div>
                                     <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
                                     <span class="text-muted text-small"><?php echo $label['description'] ?></span>
                                 </div>
                             </div>
                             <?php } ?>
-                            <div class="text-center">
+                            <div class="text-center menu-footer">
                                 <button type="submit" class="btn btn-sm btn-outline-success">Labels speichern</button>
                             </div>
                         </form>
+                    </div>
+                    <div class="issue-labels">
+                        <?php foreach ($currentLabels as $key) {
+                            $label = $db->query("SELECT name, color FROM labels WHERE labelid = $key")->fetch();
+                        ?>
+                            <span class="badge label-badge rounded-pill me-1 mb-1" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span>
+                        <?php } ?>
                     </div>
                 </div>
                 
