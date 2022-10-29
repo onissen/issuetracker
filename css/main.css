@@ -546,6 +546,10 @@ svg {
   color: white;
 }
 
+.toggleCommentMenu {
+  cursor: pointer;
+}
+
 .menu-popover {
   position: absolute;
   z-index: 100;
@@ -631,6 +635,10 @@ svg {
 .gh-modal h5 {
   font-size: 16px;
   font-weight: 600;
+}
+
+.editCommentForm {
+  display: none;
 }
 
 .options-bucket > div {

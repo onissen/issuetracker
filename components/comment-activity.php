@@ -29,6 +29,28 @@
             echo '<script type="text/JavaScript"> location.search = "";</script>';
         }
     }
+
+    if (isset($_GET['deleted'])) {
+        $id = $_GET['deleted'];
+        $action = $_GET['action'];
+
+        if ($action == 'comment') {
+            $sql = "DELETE FROM comments WHERE sql_id = $id";
+        } else{ $sql = "UPDATE comments SET text = '' WHERE sql_id = $id"; };
+
+        $stmt_delete = $db->prepare($sql);
+        if ($stmt_delete->execute()) {
+            echo '<script type="text/JavaScript"> location.search = "";</script>';
+        }
+    }
+
+    if (isset($_GET['deleteAction'])) {
+        $id = $_GET['deleteAction'];
+        $deleteAction = $db->prepare("DELETE FROM comments WHERE sql_id = $id");
+        if ($deleteAction->execute()) {
+            echo '<script type="text/JavaScript"> location.search = "";</script>';
+        }
+    }
 ?>
 
 
@@ -49,9 +71,12 @@
                         </a>
                         <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
                             <div class="popover-message shadow-lg">
+                                <!-- FIXME: Nur wenn Author/Owner/Collaborator Part of #33 -->
                                 <div class="commentDropdown text-start">
-                                    <div class="menuItem"><a>Bearbeiten</a></div>
-                                    <div class="menuItem menuItem-danger"><a>Löschen</a></div>
+                                    <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
+                                    <?php if ($comment['action'] != 'comment-intro') { ?>
+                                        <div class="menuItem menuItem-danger" onclick="toggleDeleteCommit(<?php echo $comment['sql_id'] ?>, '<?php echo $comment['action'] ?>')"><a>Löschen</a></div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -59,10 +84,19 @@
                 </div>
             </div>
             <div class="card-body">
-                <?php echo $comment['text']?>
+                <div id="show-card<?php echo $comment['sql_id'] ?>">
+                    <?php echo $comment['text']?>
+                </div>
+                <form method="post" action="?editComment=<?php echo $comment['sql_id'] ?>" class="editCommentForm" id="edit-card<?php echo $comment['sql_id'] ?>">
+                    <textarea name="text" class="text-editComment form-control" placeholder="Lasse einen Kommentar da"><?php echo $comment['text'] ?></textarea>
+                    <div class="buttons text-end my-3">
+                        <button class="btn btn-outline-danger btn-sm" type="button" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'cancel')">Verwerfen</button>
+                        <button class="btn btn-success btn-sm" type="submit">Kommentar aktualisieren</button>
+                    </div>
+                </form>
             </div>
             <?php } ?>
-            <?php if ($comment['action'] != 'comment') { ?>
+            <?php if ($comment['action'] != 'comment' AND $comment['action'] != 'comment-intro') { ?>
                 <div class="card-footer d-flex">
                     <div class="commit-action-icon <?php echo $comment['action'] ?>">
                         <?php if ($comment['action'] == 'closed') {?>
@@ -73,12 +107,22 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M5.029 2.217a6.5 6.5 0 019.437 5.11.75.75 0 101.492-.154 8 8 0 00-14.315-4.03L.427 1.927A.25.25 0 000 2.104V5.75A.25.25 0 00.25 6h3.646a.25.25 0 00.177-.427L2.715 4.215a6.491 6.491 0 012.314-1.998zM1.262 8.169a.75.75 0 00-1.22.658 8.001 8.001 0 0014.315 4.03l1.216 1.216a.25.25 0 00.427-.177V10.25a.25.25 0 00-.25-.25h-3.646a.25.25 0 00-.177.427l1.358 1.358a6.501 6.501 0 01-11.751-3.11.75.75 0 00-.272-.506z"></path><path d="M9.06 9.06a1.5 1.5 0 11-2.12-2.12 1.5 1.5 0 012.12 2.12z"></path></svg>
                         <?php } ?>
                     </div>
-                    <?php
-                        if ($comment['action'] == 'closed') {echo $comment['author'].' schoss diesen Issue am '.$comment['date'].' ab.';}
-                        elseif ($comment['action'] == 'notplanned') {echo $comment['author'].' schoss diesen Issue am '.$comment['date'].' als nicht geplant ab.';}
-                        elseif ($comment['action'] == 'reopened') {echo $comment['author'].' reaktiverte diesen Issue am '.$comment['date'].'.';}
-                        else {echo $comment['action'].' by '.$comment['author'].' on '.$comment['date'];}
-                    ?>
+                    <div class="col-10">
+                        <?php
+                            if ($comment['action'] == 'closed') {echo $comment['author'].' schoss diesen Issue am '.$comment['date'].' ab.';}
+                            elseif ($comment['action'] == 'notplanned') {echo $comment['author'].' schoss diesen Issue am '.$comment['date'].' als nicht geplant ab.';}
+                            elseif ($comment['action'] == 'reopened') {echo $comment['author'].' reaktiverte diesen Issue am '.$comment['date'].'.';}
+                            else {echo $comment['action'].' by '.$comment['author'].' on '.$comment['date'];}
+                        ?>
+                    </div>
+                    <div class="actions col-1 text-end">
+                        <!-- FIXME: If text='' und Admin/Owner/Collaorator Part of #33 -->
+                        <a class="text-danger" onclick="confirmDeleteAction(<?php echo $comment['sql_id'] ?>)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             <?php } ?>
         </div>

@@ -36,12 +36,6 @@ function toggleColorPicker(id) {
   document.getElementById('popover-color'+id).style.visibility = 'visible';
 }
 
-function toggleCommentMenu(id) {
-  console.log('click');
-  popover = document.getElementById('commentMenu'+id);
-  popover.classList.toggle('hideCommentMenu');
-}
-
 function chooseColor(color, id) {
   document.getElementById('input-color'+id).value = color;
   document.getElementById('popover-color'+id).style.visibility = 'hidden';
@@ -159,4 +153,45 @@ function toggleNewChannelWrapper() {
 function untoggleNewChannelWrapper() {
   // Neuer Channel in topic-settings.php VERBERGEN
   document.getElementById('input-wrapper-newChannel').style.display = 'none';
+}
+
+function toggleCommentMenu(id) {
+  popover = document.getElementById('commentMenu'+id);
+  popover.classList.toggle('hideCommentMenu');
+}
+
+function toggleDeleteCommit(commitid, action) {
+  if (confirm
+      ("Möchtest du diesen Kommentar wirklich löschen?")) {
+        location="?deleted="+commitid+"&action="+action;
+      }
+}
+
+function confirmDeleteAction(id) {
+  if (confirm
+    ("Möchtest du diesen Aktions-Hinweis wirklich löschen?")) {
+      location="?deleteAction="+id;
+    }
+}
+
+function toggleEditCommit(id, mode) {
+  editCard = document.getElementById('edit-card'+id);
+  showCard = document.getElementById('show-card'+id);
+
+  if (mode == 'edit') {
+    showCard.style.display = 'none';
+    editCard.style.display = 'block';
+    toggleCommentMenu(id);
+  }
+
+  if (mode == 'cancel') {
+    if (editCard.querySelector('textarea').value == showCard.innerHTML.trim()) {
+      showCard.style.display = 'block';
+      editCard.style.display = 'none';
+    } else if (confirm ("Sollen deine Änderungen an diesem Commit wirklich gelöscht werden?")) {
+      showCard.style.display = 'block';
+      editCard.style.display = 'none';
+      editCard.querySelector('textarea').value = showCard.innerHTML.trim();
+    }
+  }
 }
