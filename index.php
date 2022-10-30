@@ -50,8 +50,15 @@
         elseif ($endpoit_lvl == 4) {
             if ($endpoints[2] == 'issues') {
                 // Issues Detail
-                include 'issue_details.php';
+                if (end($endpoints) == 'new') {
+                    // New Issue
+                    include 'new_issue.php';
+                } else {
+                    // Issue Detail
+                    include 'issue_details.php';
+                }
             }
         }
     }
+
 ?>

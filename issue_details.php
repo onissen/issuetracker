@@ -1,4 +1,4 @@
-<?php 
+<?php
     $siteTitle = 'Issue Detail | '.$endpoints[0].'/'.$endpoints[1];
     require 'components/header.php'; 
 ?>
@@ -64,7 +64,7 @@
             </h1>
             <div class="col text-end">
                 <button class="btn btn-gh btn-sm" onclick="toggleIssueHeader('edit')">Bearbeiten</button>
-                <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/isssues'.'/new' ?>" class="btn btn-success btn-sm">Neuer Issue</a>
+                <a href="<?php echo $SiteURL.$endpoints[0].'/'.$endpoints[1].'/issues'.'/new' ?>" class="btn btn-success btn-sm">Neuer Issue</a>
             </div>
         </div>
         <div class="issue-title-edit pb-3 row">

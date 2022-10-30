@@ -625,6 +625,9 @@ svg {
   color: #0a58ca;
   cursor: pointer;
 }
+.sidebar-item .sidebar-heading.disabled {
+  color: #57606a;
+}
 
 .gh-modal {
   max-width: 450px;

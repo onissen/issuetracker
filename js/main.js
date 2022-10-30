@@ -116,6 +116,18 @@ function enableSubmit () {
   }
 }
 
+function enableNewSubmit () {
+  button = document.getElementById('submitNewIssue');
+  title = document.getElementById('title-NewIssue');
+  if (title.value != '') {
+    button.disabled = false;
+  }
+
+  if (title.value == '') {
+    button.disabled = true;
+  }
+}
+
 function toggleIssueHeader (action) {
   if (action == 'edit') {
     // Bearbeiten: Titel verstecken, Input zeigen
