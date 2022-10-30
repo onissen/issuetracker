@@ -92,6 +92,55 @@
                 background-color: $gh-notplanned
                 color: white
 
+.toggleCommentMenu
+    cursor: pointer
+
+.menu-popover 
+    position: absolute
+    z-index: 100
+    right: -4px
+
+    &.sidebarMenu-popover
+        top: 30px
+        margin: 4px 0 20px
+
+    &.hideCommentMenu, &.hideSidebarMenu
+        visibility: hidden
+        
+
+    .popover-message
+        position: relative
+        margin-right: auto
+        margin-left: auto
+        width: 185px
+        background-color: white
+        border: $gh-border
+        border-radius: 6px
+
+    .popover-message-bottom-left
+        margin-left: 0
+
+.commentDropdown
+    padding: 4px 0 !important
+
+    .menuItem
+        color: black
+        width: 100%
+        padding: 4px 8px 4px 16px !important
+    
+        &:hover
+            text-decoration: none
+            cursor: pointer
+            background-color: #0a58ca
+            color: white
+
+        &.menuItem-danger
+            color: #dc3545
+
+            &:hover
+                background-color: #dc3545
+                color: white
+
 .path
     width: 2px
     height: 32px
@@ -115,6 +164,10 @@
         &:hover
             color: #0a58ca
 
+    .sidebar-heading:hover
+        color: #0a58ca
+        cursor: pointer
+
 .gh-modal
     max-width: 450px
     
@@ -132,3 +185,36 @@
     h5
         font-size: 16px
         font-weight: 600
+
+.editCommentForm
+    display: none
+
+// Sidebar
+.menu-item
+    margin-top: 8px
+    padding: 8px
+
+    &:hover
+        background-color: #e9ecef
+        cursor: pointer
+
+    .form-check-input
+        margin: 0
+        margin-right: 8px
+
+.menu-footer
+    margin-top: 8px
+    padding: 8px
+    border-top: $gh-border-muted
+
+.person-chip
+    border: $gh-border-muted
+    border-color: #C2E7FF
+    border-radius: 6px
+    padding: 6px
+    margin-right: 12px
+    color: #0969da
+
+    &:hover
+        background-color: rgba(#ddf4ff, 0.5)
+        text-decoration: none

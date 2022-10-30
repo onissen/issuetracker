@@ -103,7 +103,7 @@
                             </svg>
                         </button>
                         <div class="position-relative flex-1">
-                            <input type="text" name="color" id="input-colorNew" class="form-control-sm form-control" value="TODOred" onfocus="toggleColorPicker('New')" onkeyup="dynamicBtnColor('New')">
+                            <input type="text" name="color" id="input-colorNew" class="form-control-sm form-control" value="Fallback" onfocus="toggleColorPicker('New')" onkeyup="dynamicBtnColor('New')">
                             <div class="gh-popover color-popover" id="popover-colorNew">
                                 <div class="popover-message popover-message-bottom-left p-2 mt-2 shadow-lg">
                                     <p>Aus Standardfarben wählen</p>

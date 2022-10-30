@@ -143,6 +143,17 @@ svg {
   fill: currentcolor;
   margin-right: 8px;
 }
+.topic-nav .nav-link .badge {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #0d6efd;
+  margin-left: 3px;
+}
+.topic-nav .nav-link:hover .badge, .topic-nav .nav-link:focus .badge {
+  color: #0a58ca;
+}
+.topic-nav .nav-link.active .badge {
+  color: white;
+}
 
 .topic-filter {
   border-bottom: 1px solid #d8dee4;
@@ -535,6 +546,57 @@ svg {
   color: white;
 }
 
+.toggleCommentMenu {
+  cursor: pointer;
+}
+
+.menu-popover {
+  position: absolute;
+  z-index: 100;
+  right: -4px;
+}
+.menu-popover.sidebarMenu-popover {
+  top: 30px;
+  margin: 4px 0 20px;
+}
+.menu-popover.hideCommentMenu, .menu-popover.hideSidebarMenu {
+  visibility: hidden;
+}
+.menu-popover .popover-message {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 185px;
+  background-color: white;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+.menu-popover .popover-message-bottom-left {
+  margin-left: 0;
+}
+
+.commentDropdown {
+  padding: 4px 0 !important;
+}
+.commentDropdown .menuItem {
+  color: black;
+  width: 100%;
+  padding: 4px 8px 4px 16px !important;
+}
+.commentDropdown .menuItem:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #0a58ca;
+  color: white;
+}
+.commentDropdown .menuItem.menuItem-danger {
+  color: #dc3545;
+}
+.commentDropdown .menuItem.menuItem-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
 .path {
   width: 2px;
   height: 32px;
@@ -559,6 +621,10 @@ svg {
 .sidebar-item .btn-link:hover {
   color: #0a58ca;
 }
+.sidebar-item .sidebar-heading:hover {
+  color: #0a58ca;
+  cursor: pointer;
+}
 
 .gh-modal {
   max-width: 450px;
@@ -577,6 +643,42 @@ svg {
 .gh-modal h5 {
   font-size: 16px;
   font-weight: 600;
+}
+
+.editCommentForm {
+  display: none;
+}
+
+.menu-item {
+  margin-top: 8px;
+  padding: 8px;
+}
+.menu-item:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+.menu-item .form-check-input {
+  margin: 0;
+  margin-right: 8px;
+}
+
+.menu-footer {
+  margin-top: 8px;
+  padding: 8px;
+  border-top: 1px solid #d8dee4;
+}
+
+.person-chip {
+  border: 1px solid #d8dee4;
+  border-color: #C2E7FF;
+  border-radius: 6px;
+  padding: 6px;
+  margin-right: 12px;
+  color: #0969da;
+}
+.person-chip:hover {
+  background-color: rgba(221, 244, 255, 0.5);
+  text-decoration: none;
 }
 
 .options-bucket > div {
