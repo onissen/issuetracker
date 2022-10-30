@@ -1,5 +1,5 @@
 <?php
-    //  ... wenn nach Status gefiltert, sonst alle
+    //  ... wenn nach Status gefiltert, sonst alle offenen
     if (isset($_REQUEST['filter'])) {
         if ($_REQUEST['filter'] == '' OR $_REQUEST['filter'] == 'open') {$sql_param = "AND status='open' ";}
         if ($_REQUEST['filter'] == 'closed') {$sql_param =  "AND (status='closed' OR status = 'notplanned') ";}

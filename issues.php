@@ -75,7 +75,7 @@
                     <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
                     <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>" autocomplete="off">
+                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>" autocomplete="off" onkeyup="Search(event)">
             </div>
         </div>
         <div class="col-md-4 search-nav text-end">
