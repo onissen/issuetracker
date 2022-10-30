@@ -3,7 +3,7 @@
         $text = $_POST['text'];
         $action = $_POST['action'];
         $date = date('Y-m-d');
-        $sql_newComment = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($issue_id, '$date', 'user', '$text', '$action')";
+        $sql_newComment = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', 'user', '$text', '$action')";
         $stmt_new = $db->prepare($sql_newComment);
         if ($stmt_new->execute()) {
             echo '<script type="text/JavaScript"> location.search = "";</script>';
@@ -15,7 +15,7 @@
         $text = $_POST['text'];
         $action = $_POST['action'];
         $date = date('Y-m-d');
-        $sql_commentAction = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($issue_id, '$date', 'user', '$text', '$action');";
+        $sql_commentAction = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', 'user', '$text', '$action');";
         if ($_GET['commentAction'] == 'closed') {
             $sql_commentAction.= "UPDATE issues SET status = 'closed', date_closed = '$date' WHERE sql_id = $sql_id;";
         } elseif ($_GET['commentAction'] == 'reopened') {
