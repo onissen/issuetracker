@@ -151,11 +151,14 @@
                         </form>
                     </div>
                     <div class="issue-labels">
-                        <?php foreach ($currentLabels as $key) {
-                            $label = $db->query("SELECT name, color FROM labels WHERE labelid = $key")->fetch();
+                        <?php 
+                            if ($currentLabels[0] != '') {
+                                foreach ($currentLabels as $key) {
+                                    $label = $db->query("SELECT name, color FROM labels WHERE labelid = $key")->fetch();
                         ?>
                             <span class="badge label-badge rounded-pill me-1 mb-1" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span>
-                        <?php } ?>
+                        <?php }
+                        } else { echo 'Bisher keine'; } ?>
                     </div>
                 </div>
             </div>

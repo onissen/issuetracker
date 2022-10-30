@@ -209,10 +209,12 @@
                             id="issuelink_<?php echo $issue['sql_id'] ?>"><?php echo $issue['title'] ?></a>
                             <?php
                                 $lableIDs = explode('..', $issue['label']);
-                                foreach ($lableIDs as $id) {
-                                    if ($id == $lableData[$id]['labelid']) { ?>
-                                        <a href="?search=label:<?php echo $lableData[$id]['labelid'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
-                                    <?php }
+                                if ($lableIDs[0] != '') {
+                                    foreach ($lableIDs as $id) {
+                                        if ($id == $lableData[$id]['labelid']) { ?>
+                                            <a href="?search=label:<?php echo $lableData[$id]['labelid'] ?>" class="badge label-badge rounded-pill" style="background-color: <?php echo $lableData[$id]['color'] ?>"><?php echo $lableData[$id]['name'] ?></a>
+                                        <?php }
+                                    }
                                 }
                             ?>
                             <br>
