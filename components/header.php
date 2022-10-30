@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo $SiteURL ?>/css/main.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?php echo $SiteURL ?>">
                 <i class="myoct myoct-tasklist"></i> Issue Tracker</a>

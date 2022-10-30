@@ -725,6 +725,9 @@ svg {
   border-color: rgba(27, 31, 36, 0.15);
 }
 
+.navbar-dark {
+  background-color: #0B3341;
+}
 .navbar-dark .nav-link {
   font-weight: 600;
   color: white;
