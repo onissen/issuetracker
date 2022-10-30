@@ -725,4 +725,17 @@ svg {
   border-color: rgba(27, 31, 36, 0.15);
 }
 
+.navbar-dark .nav-link {
+  font-weight: 600;
+  color: white;
+}
+.navbar-dark .nav-link:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+.navbar-dark .navbar-brand:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /*# sourceMappingURL=main.css.map */
