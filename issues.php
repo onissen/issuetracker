@@ -47,6 +47,8 @@
     foreach ($result_labels as $key) {
         $lableData[$key['labelid']] = $key;
     }
+
+    $authors = $db->query("SELECT author FROM issues WHERE tpid=$topicid GROUP BY author")->fetchAll();
 ?>
 
 <div class="container container-xl mt-4">
@@ -128,7 +130,13 @@
                     <div class="filterbar-item" id="author">                       
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Autor</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Author</a></li>
+                            <?php foreach ($authors as $author) { ?>
+                                <li>
+                                    <a class="dropdown-item" href="?search=author:<?php echo $author['author'] ?>">
+                                        <?php echo $author['author'] ?>
+                                    </a>
+                                </li>
+                                <?php } ?>
                         </ul>
                     </div>
                     <div class="filterbar-item" id="label">                       
@@ -144,35 +152,18 @@
                                 <?php } ?>
                             </ul>
                     </div>
-                    <div class="filterbar-item" id="project">                       
+                    <!-- <div class="filterbar-item" id="project">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekte</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Project</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- <div class="filterbar-item" id="milestone">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
                         </ul>
                     </div> -->
-                    <div class="filterbar-item" id="assignee">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verantwortlicher</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Assignee</a></li>
-                        </ul>
-                    </div>
-                    <div class="filterbar-item" id="sort">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sortierung</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Neuste</a></li>
-                            <li><a class="dropdown-item" href="#">Älteste</a></li>
-                            <li><a class="dropdown-item" href="#">Meiste Reaktionen</a></li>
-                            <li><a class="dropdown-item" href="#">Wenigste Reaktionen</a></li>
-                            <li><a class="dropdown-item" href="#">Kürzlich aktualisiert</a></li>
-                            <li><a class="dropdown-item" href="#">Lange nicht aktualisiert</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div> <!-- .issuelist-header -->
