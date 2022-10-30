@@ -7,15 +7,15 @@
 <?php
     $topicid = $info['tpid'];
     $issue_id = $endpoints[3];
-    $sql = "SELECT issues.* FROM issues WHERE id = $issue_id AND tpid = $topicid";
     $issues = $db->query("SELECT issues.* FROM issues WHERE id = $issue_id AND tpid = $topicid")->fetch();
-    $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $issue_id; ")->fetchColumn();
-    $comments = $db->query("SELECT * FROM comments WHERE issue_id = $issue_id ORDER BY date, issue_id")->fetchAll();
+    $sql_id = $issues['sql_id'];
+    $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $sql_id; ")->fetchColumn();
+    $comments = $db->query("SELECT * FROM comments WHERE issue_id = $sql_id ORDER BY date, issue_id")->fetchAll();
     $labels = $db->query("SELECT * FROM labels WHERE topicid = $topicid ORDER BY labelid")->fetchAll();
 
     $currentLabels = explode('..', $issues['label']);
-    $sql_authors = "SELECT author FROM comments WHERE issue_id = $issue_id GROUP BY author";
-    $comment_authors = $db->query("SELECT author FROM comments WHERE issue_id = $issue_id GROUP BY author")->fetchAll();
+    $sql_authors = "SELECT author FROM comments WHERE issue_id = $sql_id GROUP BY author";
+    $comment_authors = $db->query("SELECT author FROM comments WHERE issue_id = $sql_id GROUP BY author")->fetchAll();
 
 
     if (isset($_POST['editTitle'])) {
@@ -46,7 +46,7 @@
                 $label.= '..';
             }
         }
-        $setLabel = $db->prepare("UPDATE issues SET label = '$label' WHERE sql_id = $issue_id");
+        $setLabel = $db->prepare("UPDATE issues SET label = '$label' WHERE sql_id = $sql_id");
         if ($setLabel->execute()) {
             echo '<script type="text/JavaScript"> location.search = "";</script>';
         }
