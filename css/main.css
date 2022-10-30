@@ -668,6 +668,19 @@ svg {
   border-top: 1px solid #d8dee4;
 }
 
+.person-chip {
+  border: 1px solid #d8dee4;
+  border-color: #C2E7FF;
+  border-radius: 6px;
+  padding: 6px;
+  margin-right: 12px;
+  color: #0969da;
+}
+.person-chip:hover {
+  background-color: rgba(221, 244, 255, 0.5);
+  text-decoration: none;
+}
+
 .options-bucket > div {
   margin-top: 40px;
 }

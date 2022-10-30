@@ -205,3 +205,6 @@ function toggleCheck(id) {
   checkbox = document.getElementById('label'+id);
   checkbox.checked = !checkbox.checked;
 }
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
