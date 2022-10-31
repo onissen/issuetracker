@@ -73,11 +73,16 @@
                     <li><a class="dropdown-item" href="?filter=all">Alle Issues</a></li>
                     <li><a class="dropdown-item" href="?filter=open">Offene Issues</a></li>
                     <li><a class="dropdown-item" href="?filter=closed">Erledigte Issues</a></li>
-                    <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
-                    <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>" autocomplete="off" onkeyup="Search(event)">
+                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event); SuggestType()" list="suggestType">
+                <datalist id="suggestType">
+                    <option class="suggest-option" id="query-option"><span class="type">query</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="title-option"><span class="type">title</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="status-option"><span class="type">status</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="author-option"><span class="type">author</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="label-option"><span class="type">label</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="id-option"><span class="type">id</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                </datalist>
             </div>
         </div>
         <div class="col-md-4 search-nav text-end">
@@ -156,12 +161,6 @@
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekte</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Project</a></li>
-                        </ul>
-                    </div> -->
-                    <!-- <div class="filterbar-item" id="milestone">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
                         </ul>
                     </div> -->
                 </div>

@@ -16,6 +16,36 @@ function Search(event) {
   }
 }
 
+function SuggestType() {
+  inputValue = document.getElementById('searchbox').value;
+  devider = inputValue.search(':');
+  searchword = inputValue.substr(devider+1);
+
+  query = document.querySelector('.suggest-option#query-option');
+  query.value = 'query:'+searchword;
+  query.innerHTML = 'query:'+searchword;
+
+  title = document.querySelector('.suggest-option#title-option');
+  title.value = 'title:'+searchword;
+  title.innerHTML = 'title:'+searchword;
+
+  IssueStatus = document.querySelector('.suggest-option#status-option');
+  IssueStatus.value = 'status:'+searchword;
+  IssueStatus.innerHTML = 'status:'+searchword;
+
+  author = document.querySelector('.suggest-option#author-option');
+  author.value = 'author:'+searchword;
+  author.innerHTML = 'author:'+searchword;
+
+  id = document.querySelector('.suggest-option#id-option');
+  id.value = 'id:'+searchword;
+  id.innerHTML = 'id:'+searchword;
+
+  label = document.querySelector('.suggest-option#label-option');
+  label.value = 'label:'+searchword;
+  label.innerHTML = 'label:'+searchword;
+}
+
 
 function toggleDelete(labelid) {
     if (confirm
