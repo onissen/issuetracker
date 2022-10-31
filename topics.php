@@ -5,7 +5,47 @@
 
 <?php
 
-    $sql = "SELECT topics.*, channels.channel FROM topics LEFT JOIN channels ON topics.chid = channels.chid";
+    $sql = "SELECT topics.*, channels.channel FROM topics LEFT JOIN channels ON topics.chid = channels.chid ";
+    
+    if (isset($_REQUEST['search']) AND !isset($_REQUEST['type']) AND !isset($_REQUEST['features'])) {
+        $search = $_REQUEST['search'];
+        $sql.= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
+
+    } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search']) AND !isset($_REQUEST['features'])) {
+        $type = $_REQUEST['type'];
+        $sql .= "WHERE (visibility LIKE '%$type%')";
+
+    } elseif (isset($_REQUEST['features']) AND !isset($_REQUEST['search']) AND !isset($_REQUEST['type'])) {
+        $feature = $_REQUEST['features'];
+        $sql .= "WHERE ($feature = 1)";
+
+    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type']) AND !isset($_REQUEST['features'])) {
+        $search = $_REQUEST['search'];
+        $type = $_REQUEST['type'];
+        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
+        $sql .= "AND (visibility LIKE '%$type%')";
+
+    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['features']) AND !isset($_REQUEST['type'])) {
+        $search = $_REQUEST['search'];
+        $feature = $_REQUEST['features'];
+        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
+        $sql .= "AND ($feature = 1)";
+
+    } elseif (isset($_REQUEST['type']) AND isset($_REQUEST['features']) AND !isset($_REQUEST['search'])) {
+        $type = $_REQUEST['type'];
+        $feature = $_REQUEST['features'];
+        $sql .= "WHERE (visibility LIKE '%$type%')";
+        $sql .= "AND ($feature = 1)";
+
+    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['features']) AND isset($_REQUEST['type'])) {
+        $search = $_REQUEST['search'];
+        $type = $_REQUEST['type'];
+        $feature = $_REQUEST['features'];
+        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
+        $sql .= "AND (visibility LIKE '%$type%')";
+        $sql .= "AND ($feature = 1)";
+
+    }    
     $result = $db->query($sql)->fetchAll();
 
 ?>
@@ -13,23 +53,18 @@
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
-    <div class="topic-filter d-flex align-items-start">
-        <!-- TODO: Suche nach allen Themen #43 ----->
+    <div class="topic-filter d-flex flex-row align-items-start">
+        <div class="flex-grow-1 me-2">
+            <input type="text" name="search" id="searchbox" class="form-control" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event)" placeholder="Finde ein Thema">
+        </div>
         <div class="d-flex flex-wrap text-end" id="topic-filter-dropdown">
-            <button type="button" class="btn btn-gh me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-gh me-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Typ
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><button class="dropdown-item" type="button">Öffentlich</button></li>
                 <li><button class="dropdown-item" type="button">Angemeldet</button></li>
                 <!-- TODO: und weitere #39  -->
-            </ul>
-            <button type="button" class="btn btn-gh dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Sortierung
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><button class="dropdown-item" type="button">Zuletzt aktualisiert</button></li>
-                <li><button class="dropdown-item" type="button">Name</button></li>
             </ul>
         </div>
         <div class="d-md-flex flex-md-items-center flex-md-justify-end">
@@ -62,8 +97,6 @@
                 <div class="topic-description">
                     <p><?php echo $topic['description'] ?></p>
                 </div>
-                <!-- TODO: Tags hinzufügen #37 -->
-                <!-- TODO: "Codesprache"-Tag hinzufügen #37 ?-->
             </div>
         <?php } ?>
     </div>
