@@ -76,12 +76,11 @@
                 </ul>
                 <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event); SuggestType()" list="suggestType">
                 <datalist id="suggestType">
-                    <option class="suggest-option" id="query-option"><span class="type">query</span><span class="displayValue"><!-- von JS befüllt --></span></option>
-                    <option class="suggest-option" id="title-option"><span class="type">title</span><span class="displayValue"><!-- von JS befüllt --></span></option>
-                    <option class="suggest-option" id="status-option"><span class="type">status</span><span class="displayValue"><!-- von JS befüllt --></span></option>
-                    <option class="suggest-option" id="author-option"><span class="type">author</span><span class="displayValue"><!-- von JS befüllt --></span></option>
-                    <option class="suggest-option" id="label-option"><span class="type">label</span><span class="displayValue"><!-- von JS befüllt --></span></option>
-                    <option class="suggest-option" id="id-option"><span class="type">id</span><span class="displayValue"><!-- von JS befüllt --></span></option>
+                    <option class="suggest-option" id="query-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="title-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="status-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="author-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="id-option"><!-- von JS befüllt --></option>
                 </datalist>
             </div>
         </div>
@@ -110,7 +109,16 @@
             </a>
         </div>
     </div>
-
+    <?php if (isset($_GET['search'])) { ?>
+        <div class="reset-searchquery mt-3">
+            <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" id="resetQueryIcon">
+                    <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+                </svg>
+                Aktuelle Suchbegriffe und Filter zurücksetzen
+            </a>
+        </div>
+    <?php } ?>
     <div class="issuelist-wrapper mt-3">
         <div class="issuelist-header d-flex">
             <div class="me-3 d-none d-md-block flex-auto">                
@@ -239,6 +247,13 @@
             <?php } ?>
         </div> <!-- issuelist-list -->        
     </div> <!-- .issuelist-wrapper -->
+
+    <div class="footer-notice mt-3 text-muted text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+            <path fill-rule="evenodd" d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 01-1.484.211c-.04-.282-.163-.547-.37-.847a8.695 8.695 0 00-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.75.75 0 01-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75zM6 15.25a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5a.75.75 0 01-.75-.75zM5.75 12a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"></path>
+        </svg>
+        <span>Die Suche nach Lables funktioniert nicht über den Namen, sondern nur über die ID. Wähle am besten einfach ein Label aus der Filter-Liste.</span>
+    </div>
 </div>
 
 <?php require 'components/footer.php' ?>
