@@ -7,7 +7,7 @@ function Search(event) {
     if (URLRequest != '' || !URLRequest.startsWith('?search=')) {
         if (URLRequest.includes("&search")) {
             old_search = URLRequest.substring(URLRequest.indexOf("&search"));
-            URLRequest = URLRequest.replace(old_search, ''); // ?filter...
+            URLRequest = URLRequest.replace(old_search, ''); // ?filter... oder ?type...
         }
         URLRequest += '&search='+searchbox.value;
 

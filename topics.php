@@ -7,45 +7,24 @@
 
     $sql = "SELECT topics.*, channels.channel FROM topics LEFT JOIN channels ON topics.chid = channels.chid ";
     
-    if (isset($_REQUEST['search']) AND !isset($_REQUEST['type']) AND !isset($_REQUEST['features'])) {
+    if (isset($_REQUEST['search']) AND !isset($_REQUEST['type'])) {
         $search = $_REQUEST['search'];
         $sql.= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
 
-    } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search']) AND !isset($_REQUEST['features'])) {
+    } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search']) ) {
         $type = $_REQUEST['type'];
         $sql .= "WHERE (visibility LIKE '%$type%')";
 
-    } elseif (isset($_REQUEST['features']) AND !isset($_REQUEST['search']) AND !isset($_REQUEST['type'])) {
-        $feature = $_REQUEST['features'];
-        $sql .= "WHERE ($feature = 1)";
-
-    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type']) AND !isset($_REQUEST['features'])) {
+    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type']) ) {
         $search = $_REQUEST['search'];
         $type = $_REQUEST['type'];
         $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
         $sql .= "AND (visibility LIKE '%$type%')";
 
-    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['features']) AND !isset($_REQUEST['type'])) {
-        $search = $_REQUEST['search'];
-        $feature = $_REQUEST['features'];
-        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
-        $sql .= "AND ($feature = 1)";
-
-    } elseif (isset($_REQUEST['type']) AND isset($_REQUEST['features']) AND !isset($_REQUEST['search'])) {
-        $type = $_REQUEST['type'];
-        $feature = $_REQUEST['features'];
-        $sql .= "WHERE (visibility LIKE '%$type%')";
-        $sql .= "AND ($feature = 1)";
-
-    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['features']) AND isset($_REQUEST['type'])) {
-        $search = $_REQUEST['search'];
-        $type = $_REQUEST['type'];
-        $feature = $_REQUEST['features'];
-        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
-        $sql .= "AND (visibility LIKE '%$type%')";
-        $sql .= "AND ($feature = 1)";
-
-    }    
+    } else {
+        echo 'Fallback else';
+        // TODO: If authenticated show, else nur public #39
+    }
     $result = $db->query($sql)->fetchAll();
 
 ?>
@@ -62,8 +41,8 @@
                 Typ
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><button class="dropdown-item" type="button">Öffentlich</button></li>
-                <li><button class="dropdown-item" type="button">Angemeldet</button></li>
+                <li><a href="?type=public" class="dropdow-item">Öffentliche Themen</a></li>
+                <li><a href="?type=authenticated" class="dropdow-item">Interne Themen</a></li>
                 <!-- TODO: und weitere #39  -->
             </ul>
         </div>

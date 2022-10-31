@@ -109,7 +109,7 @@
             </a>
         </div>
     </div>
-    <?php if (isset($_GET['search'])) { ?>
+    <?php if (isset($_GET['search']) OR isset($_GET['filter'])) { ?>
         <div class="reset-searchquery mt-3">
             <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" id="resetQueryIcon">
