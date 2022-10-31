@@ -1,5 +1,6 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -279,6 +280,26 @@ svg {
 }
 .searchbar #new-issue svg {
   margin-right: 2px;
+}
+
+.reset-searchquery a {
+  font-weight: 600;
+  color: #6e7781;
+}
+.reset-searchquery a:hover {
+  color: #0969da;
+  text-decoration: none;
+}
+.reset-searchquery a:hover #resetQueryIcon {
+  background-color: #0969da;
+}
+.reset-searchquery a #resetQueryIcon {
+  padding: 1px;
+  margin-right: 4px;
+  color: white;
+  background-color: #6e7781;
+  text-align: center;
+  border-radius: 6px;
 }
 
 .issuelist-wrapper {

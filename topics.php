@@ -5,31 +5,44 @@
 
 <?php
 
-    $sql = "SELECT topics.*, channels.channel FROM topics LEFT JOIN channels ON topics.chid = channels.chid";
-    $result = $db->query($sql)->fetchAll();
+    $sql = "SELECT topics.*, channels.channel FROM topics LEFT JOIN channels ON topics.chid = channels.chid ";
+    
+    if (isset($_REQUEST['search']) AND !isset($_REQUEST['type'])) {
+        $search = $_REQUEST['search'];
+        $sql.= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
 
+    } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search']) ) {
+        $type = $_REQUEST['type'];
+        $sql .= "WHERE (visibility LIKE '%$type%')";
+
+    } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type']) ) {
+        $search = $_REQUEST['search'];
+        $type = $_REQUEST['type'];
+        $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
+        $sql .= "AND (visibility LIKE '%$type%')";
+
+    } else {
+        // TODO: If authenticated show, else nur public #39
+    }
+    $result = $db->query($sql)->fetchAll();
+    $results_average = count($result);
 ?>
 
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
-    <div class="topic-filter d-flex align-items-start">
-        <!-- TODO: Suche nach allen Themen #43 ----->
+    <div class="topic-filter d-flex flex-row align-items-start">
+        <div class="flex-grow-1 me-2">
+            <input type="text" name="search" id="searchbox" class="form-control" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event)" placeholder="Finde ein Thema">
+        </div>
         <div class="d-flex flex-wrap text-end" id="topic-filter-dropdown">
-            <button type="button" class="btn btn-gh me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-gh me-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Typ
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><button class="dropdown-item" type="button">Öffentlich</button></li>
-                <li><button class="dropdown-item" type="button">Angemeldet</button></li>
+                <li><a href="?type=public" class="dropdown-item">Öffentliche Themen</a></li>
+                <li><a href="?type=authenticated" class="dropdown-item">Interne Themen</a></li>
                 <!-- TODO: und weitere #39  -->
-            </ul>
-            <button type="button" class="btn btn-gh dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Sortierung
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><button class="dropdown-item" type="button">Zuletzt aktualisiert</button></li>
-                <li><button class="dropdown-item" type="button">Name</button></li>
             </ul>
         </div>
         <div class="d-md-flex flex-md-items-center flex-md-justify-end">
@@ -43,6 +56,32 @@
             </a> -->
         </div>
     </div>
+
+    <?php if (isset($_REQUEST['search']) OR isset($_REQUEST['type'])) { ?>
+        <div class="search-summary row border-bottom py-3 m-0">
+            <div class="col-md" id="result-summary">
+                <?php if (isset($_REQUEST['search']) AND !isset($_REQUEST['type'])) { ?>
+                    <b><?php echo $results_average ?></b> Ergebnisse für Themen mit <b><?php echo $_REQUEST['search'] ?></b>
+                <?php } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search'])) {
+                    if ($_REQUEST['type'] == 'public') {echo '<b>'.$results_average.' öffentliche Themen'.'</b>';}
+                    if ($_REQUEST['type'] == 'authenticated') {echo '<b>'.$results_average.' interne Themen'.'</b>';}
+                } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type'])) { ?>
+                    <b><?php echo $results_average ?></b> Ergebnisse für 
+                    <b><?php if ($_REQUEST['type'] == 'public') {echo 'öffentliche';}
+                    if ($_REQUEST['type'] == 'authenticated') {echo 'interne';} ?></b> 
+                    Themen mit <b><?php echo $_REQUEST['search'] ?></b>
+                <?php }?>
+            </div>
+            <div class="col-md-2 d-md-block d-sm-none reset-searchquery">
+                <a href="<?php echo $SiteURL ?>">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" id="resetQueryIcon">
+                        <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+                    </svg>
+                    Filter zurücksetzen
+                </a>
+            </div>
+        </div>
+    <?php } ?>
 
     <div class="topic-ul">
         <?php foreach ($result as $topic) { ?>
@@ -62,8 +101,6 @@
                 <div class="topic-description">
                     <p><?php echo $topic['description'] ?></p>
                 </div>
-                <!-- TODO: Tags hinzufügen #37 -->
-                <!-- TODO: "Codesprache"-Tag hinzufügen #37 ?-->
             </div>
         <?php } ?>
     </div>

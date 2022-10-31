@@ -47,6 +47,8 @@
     foreach ($result_labels as $key) {
         $lableData[$key['labelid']] = $key;
     }
+
+    $authors = $db->query("SELECT author FROM issues WHERE tpid=$topicid GROUP BY author")->fetchAll();
 ?>
 
 <div class="container container-xl mt-4">
@@ -71,11 +73,15 @@
                     <li><a class="dropdown-item" href="?filter=all">Alle Issues</a></li>
                     <li><a class="dropdown-item" href="?filter=open">Offene Issues</a></li>
                     <li><a class="dropdown-item" href="?filter=closed">Erledigte Issues</a></li>
-                    <!-- <li><a class="dropdown-item" href="?q=yours">Deine Issues</a></li>
-                    <li><a class="dropdown-item" href="?q=assined">Verantwortung</a></li>
-                    <li><a class="dropdown-item" href="?q=assined">Erwähnung</a></li> -->
                 </ul>
-                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} else {echo "query:";}?>" autocomplete="off">
+                <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event); SuggestType()" list="suggestType">
+                <datalist id="suggestType">
+                    <option class="suggest-option" id="query-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="title-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="status-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="author-option"><!-- von JS befüllt --></option>
+                    <option class="suggest-option" id="id-option"><!-- von JS befüllt --></option>
+                </datalist>
             </div>
         </div>
         <div class="col-md-4 search-nav text-end">
@@ -103,7 +109,16 @@
             </a>
         </div>
     </div>
-
+    <?php if (isset($_GET['search']) OR isset($_GET['filter'])) { ?>
+        <div class="reset-searchquery mt-3">
+            <a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" id="resetQueryIcon">
+                    <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+                </svg>
+                Aktuelle Suchbegriffe und Filter zurücksetzen
+            </a>
+        </div>
+    <?php } ?>
     <div class="issuelist-wrapper mt-3">
         <div class="issuelist-header d-flex">
             <div class="me-3 d-none d-md-block flex-auto">                
@@ -128,7 +143,13 @@
                     <div class="filterbar-item" id="author">                       
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Autor</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Author</a></li>
+                            <?php foreach ($authors as $author) { ?>
+                                <li>
+                                    <a class="dropdown-item" href="?search=author:<?php echo $author['author'] ?>">
+                                        <?php echo $author['author'] ?>
+                                    </a>
+                                </li>
+                                <?php } ?>
                         </ul>
                     </div>
                     <div class="filterbar-item" id="label">                       
@@ -144,35 +165,12 @@
                                 <?php } ?>
                             </ul>
                     </div>
-                    <div class="filterbar-item" id="project">                       
+                    <!-- <div class="filterbar-item" id="project">                       
                         <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekte</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Foreach Project</a></li>
                         </ul>
-                    </div>
-                    <!-- <div class="filterbar-item" id="milestone">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Meilensteine</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Milestone</a></li>
-                        </ul>
                     </div> -->
-                    <div class="filterbar-item" id="assignee">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verantwortlicher</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foreach Assignee</a></li>
-                        </ul>
-                    </div>
-                    <div class="filterbar-item" id="sort">                       
-                        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sortierung</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Neuste</a></li>
-                            <li><a class="dropdown-item" href="#">Älteste</a></li>
-                            <li><a class="dropdown-item" href="#">Meiste Reaktionen</a></li>
-                            <li><a class="dropdown-item" href="#">Wenigste Reaktionen</a></li>
-                            <li><a class="dropdown-item" href="#">Kürzlich aktualisiert</a></li>
-                            <li><a class="dropdown-item" href="#">Lange nicht aktualisiert</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div> <!-- .issuelist-header -->
@@ -249,6 +247,13 @@
             <?php } ?>
         </div> <!-- issuelist-list -->        
     </div> <!-- .issuelist-wrapper -->
+
+    <div class="footer-notice mt-3 text-muted text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+            <path fill-rule="evenodd" d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 01-1.484.211c-.04-.282-.163-.547-.37-.847a8.695 8.695 0 00-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.75.75 0 01-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75zM6 15.25a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5a.75.75 0 01-.75-.75zM5.75 12a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"></path>
+        </svg>
+        <span>Die Suche nach Lables funktioniert nicht über den Namen, sondern nur über die ID. Wähle am besten einfach ein Label aus der Filter-Liste.</span>
+    </div>
 </div>
 
 <?php require 'components/footer.php' ?>
