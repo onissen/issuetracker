@@ -3,7 +3,8 @@
         $text = $_POST['text'];
         $action = $_POST['action'];
         $date = date('Y-m-d');
-        $sql_newComment = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', 'user', '$text', '$action')";
+        $user = $_SESSION['username'];
+        $sql_newComment = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', '$user', '$text', '$action')";
         $stmt_new = $db->prepare($sql_newComment);
         if ($stmt_new->execute()) {
             echo '<script type="text/JavaScript"> location.search = "";</script>';
@@ -72,27 +73,28 @@
                 <div class="col-11">
                     <b><?php echo $comment['author'] ?></b> <span>schrieb am <?php echo $comment['date'] ?></span>
                 </div>
-                <div class="actions col-1 text-end">
-                    <div class="position-relative flex-1">
-                        <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                            </svg>
-                        </a>
-                        <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
-                            <div class="popover-message shadow-lg">
-                                <!-- FIXME: Nur wenn Author/Owner/Collaborator Part of #33 -->
-                                
-                                <div class="commentDropdown text-start">
-                                    <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
-                                    <?php if ($comment['action'] != 'comment-intro') { ?>
-                                        <div class="menuItem menuItem-danger" onclick="toggleDeleteCommit(<?php echo $comment['sql_id'] ?>, '<?php echo $comment['action'] ?>')"><a>Löschen</a></div>
-                                    <?php } ?>
+                <?php if (isset($_SESSION['username'])) {
+                    if ($_SESSION['role'] == 'admin' OR $comment['author'] == $_SESSION['username'] OR $issues['author'] == $_SESSION['username']) { ?>
+                        <div class="actions col-1 text-end">
+                            <div class="position-relative flex-1">
+                                <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                        <path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                                    </svg>
+                                </a>
+                                <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
+                                    <div class="popover-message shadow-lg">
+                                        <div class="commentDropdown text-start">
+                                            <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
+                                            <?php if ($comment['action'] != 'comment-intro') { ?>
+                                                <div class="menuItem menuItem-danger" onclick="toggleDeleteCommit(<?php echo $comment['sql_id'] ?>, '<?php echo $comment['action'] ?>')"><a>Löschen</a></div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                <?php }} ?>
             </div>
             <div class="card-body">
                 <div id="show-card<?php echo $comment['sql_id'] ?>">

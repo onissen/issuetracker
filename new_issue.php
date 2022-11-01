@@ -12,7 +12,7 @@
         $title = $_POST['title'];
         $status = 'open';
         $date_opened = date('Y-m-d');
-        $author = 'user';
+        $author = $_SESSION['username'];
         $text = $_POST['text'];
         $action = $_POST['action'];
         $lastid = $db->query("SELECT MAX(id) AS lastid FROM issues WHERE tpid = $topicid")->fetch();
@@ -87,10 +87,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                 <path fill-rule="evenodd" d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.005 6.005 0 00-3.432-5.142z"></path>
                             </svg>
-                            <span><?php echo 'user' ?></span>
+                            <span><?php echo $_SESSION['username'] ?></span>
                         </a>
-                        <!-- FIXME: Den Session User anzeigen #17 -->
-                        <!-- FIXME:Link anpassen wenn Filter geändert sind #16, #22 -->
                     </div>
                 </div>
             </div>
