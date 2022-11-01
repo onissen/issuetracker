@@ -18,6 +18,9 @@
         if ($password != $passwordDehashed) {
             $Alert = 'Das Passwort ist falsch';
             $AlertTheme = 'warning';
+        } elseif ($userExists['role_issues'] == '') {
+            $Alert = 'Dieser Benutzer ist nicht zur Anmeldung freigeschaltet.<br>Du kannst dir trotzdem die öffentlichen Themen ansehen.';
+            $AlertTheme = 'warning';
         } else {
             $_SESSION['username'] = $userExists['username'];
             $_SESSION['name'] = $userExists['name'];
