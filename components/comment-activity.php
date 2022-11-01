@@ -72,24 +72,26 @@
                     <b><?php echo $comment['author'] ?></b> <span>schrieb am <?php echo $comment['date'] ?></span>
                 </div>
                 <div class="actions col-1 text-end">
-                    <div class="position-relative flex-1">
-                        <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                            </svg>
-                        </a>
-                        <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
-                            <div class="popover-message shadow-lg">
-                                <!-- FIXME: Nur wenn Author/Owner/Collaborator Part of #33 -->
-                                <div class="commentDropdown text-start">
-                                    <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
-                                    <?php if ($comment['action'] != 'comment-intro') { ?>
-                                        <div class="menuItem menuItem-danger" onclick="toggleDeleteCommit(<?php echo $comment['sql_id'] ?>, '<?php echo $comment['action'] ?>')"><a>Löschen</a></div>
-                                    <?php } ?>
+                <?php if (isset($_SESSION['username'])) {
+                        if ($_SESSION['role'] == 'admin' OR $comment['author'] == $_SESSION['username'] OR $issues['author'] == $_SESSION['username']) { ?>
+                            <div class="position-relative flex-1">
+                                <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                        <path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                                    </svg>
+                                </a>
+                                <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
+                                    <div class="popover-message shadow-lg">
+                                        <div class="commentDropdown text-start">
+                                            <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
+                                            <?php if ($comment['action'] != 'comment-intro') { ?>
+                                                <div class="menuItem menuItem-danger" onclick="toggleDeleteCommit(<?php echo $comment['sql_id'] ?>, '<?php echo $comment['action'] ?>')"><a>Löschen</a></div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                    <?php }} ?>
                 </div>
             </div>
             <div class="card-body">
@@ -125,12 +127,13 @@
                         ?>
                     </div>
                     <div class="actions col-1 text-end">
-                        <!-- FIXME: If text='' und Admin/Owner/Collaorator Part of #33 -->
-                        <a class="text-danger" onclick="confirmDeleteAction(<?php echo $comment['sql_id'] ?>)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
-                            </svg>
-                        </a>
+                        <?php if(isset($_SESSION['role']) AND $_SESSION['role'] == 'admin' OR $_SESSION['role'] == 'manager') { ?>
+                            <a class="text-danger" onclick="confirmDeleteAction(<?php echo $comment['sql_id'] ?>)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
+                                </svg>
+                            </a>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
