@@ -15,7 +15,8 @@
         $text = $_POST['text'];
         $action = $_POST['action'];
         $date = date('Y-m-d');
-        $sql_commentAction = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', 'user', '$text', '$action');";
+        $user = $_SESSION['username'];
+        $sql_commentAction = "INSERT INTO comments (issue_id, date, author, text, action) VALUES ($sql_id, '$date', '$user', '$text', '$action');";
         if ($_GET['commentAction'] == 'closed') {
             $sql_commentAction.= "UPDATE issues SET status = 'closed', date_closed = '$date' WHERE sql_id = $sql_id;";
         } elseif ($_GET['commentAction'] == 'reopened') {
@@ -81,6 +82,7 @@
                         <div class="menu-popover hideCommentMenu" id="commentMenu<?php echo $comment['sql_id'] ?>">
                             <div class="popover-message shadow-lg">
                                 <!-- FIXME: Nur wenn Author/Owner/Collaborator Part of #33 -->
+                                
                                 <div class="commentDropdown text-start">
                                     <div class="menuItem" onclick="toggleEditCommit(<?php echo $comment['sql_id'] ?>, 'edit')"><a>Bearbeiten</a></div>
                                     <?php if ($comment['action'] != 'comment-intro') { ?>
@@ -137,7 +139,8 @@
         </div>
         <div class="path"></div>
     <?php } ?>
-
+    
+    <!-- FIXME: If Authenticated, sonst Hinweis #70 -->
     <div id="discussion-contribute" class="mb-5">
         <div class="card discussion-card" id="new-comment">
             <div class="card-header">

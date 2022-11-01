@@ -183,7 +183,6 @@
                                 <span><?php echo $author['author'] ?></span>
                             </a>
                         <?php } ?>
-                        <!-- FIXME:Link anpassen wenn Filter geändert sind #16, #22 -->
                     </div>
                 </div>
             </div>
