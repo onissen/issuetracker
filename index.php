@@ -19,7 +19,10 @@
             // } elseif ($endpoints[0] == 'newChannel') {
             //     // Neues Thema
             //     include 'new_channel.php';
-            } else {
+            } elseif ($endpoints[0] == 'login') {
+                include 'login.php';
+            }
+            else {
                 include 'topics.php';
             }
             
