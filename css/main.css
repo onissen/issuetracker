@@ -566,6 +566,9 @@ svg {
   background-color: #6e7781;
   color: white;
 }
+.discussion-card .card-footer #deleteActionBtn {
+  cursor: pointer;
+}
 
 .toggleCommentMenu {
   cursor: pointer;
