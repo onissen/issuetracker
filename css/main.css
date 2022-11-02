@@ -92,12 +92,15 @@ svg {
   padding: 0;
 }
 
+.topic-info {
+  margin-bottom: 16px;
+}
+
 .topic-headline {
   font-size: 20px;
   float: left;
   display: flex;
   line-height: 1;
-  margin-bottom: 16px;
 }
 .topic-headline svg {
   margin: auto 8px auto 0;
@@ -208,6 +211,9 @@ svg {
   margin-bottom: 8px;
   color: #57606a;
   font-size: 14px;
+}
+.topic-description p {
+  margin: 0;
 }
 
 .topic-devider {
@@ -815,6 +821,10 @@ svg {
 .navbar-dark .navbar-brand:hover {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.nested-form-check {
+  margin-left: 1.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */

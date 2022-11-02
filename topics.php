@@ -36,6 +36,8 @@
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
+    <?php echo $db->errorCode(); ?>
+
     <div class="topic-filter d-flex flex-row align-items-start">
         <div class="flex-grow-1 me-2">
             <input type="text" name="search" id="searchbox" class="form-control" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event)" placeholder="Finde ein Thema">
@@ -55,7 +57,7 @@
             </ul>
         </div>
         <div class="d-md-flex flex-md-items-center flex-md-justify-end">
-            <?php if(isset($_SESSION['role']) AND ($_SESSION['role'] == 'manager' OR $_SESSION['role'] == 'admin')) { ?>
+            <?php if(isset($_SESSION['role'])) { ?>
                 <a href="<?php echo $SiteURL ?>newTopic" class="btn btn-primary ms-3">
                     Neues Thema
                 </a>
@@ -125,6 +127,7 @@
                     <div class="topic-description">
                         <p><?php echo $topic['description'] ?></p>
                     </div>
+                    <div id="topic-author" class="text-small text-muted">von <?php echo $topic['owner'] ?></div>
                 </div>
             <?php } ?>
         </div>

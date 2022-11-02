@@ -248,8 +248,23 @@ function toggleCheck(id) {
   checkbox.checked = !checkbox.checked;
 }
 
+function UncheckNestedBox (parentFeature) {
+  parentCheckbox = document.querySelector('#check-issues');
+  nestedCheckbox = document.querySelector('.nested-checkbox-'+parentFeature);
+  
+  if (nestedCheckbox.checked == true && parentCheckbox.checked == false) {
+    nestedCheckbox.checked = false;
+  }
+  if (nestedCheckbox.checked == false && parentCheckbox.checked == true) {
+    nestedCheckbox.checked = true;
+  }
+
+  console.log(parentCheckbox.checked);
+  console.log(nestedCheckbox.checked);
+}
+
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));

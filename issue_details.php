@@ -12,6 +12,7 @@
     $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $sql_id; ")->fetchColumn();
     $comments = $db->query("SELECT * FROM comments WHERE issue_id = $sql_id ORDER BY date, issue_id")->fetchAll();
     $labels = $db->query("SELECT * FROM labels WHERE topicid = $topicid ORDER BY labelid")->fetchAll();
+    $labels_average = count($labels);
 
     $currentLabels = explode('..', $issues['label']);
     $sql_authors = "SELECT author FROM comments WHERE issue_id = $sql_id GROUP BY author";
@@ -147,14 +148,17 @@
                     </div>
                     <div class="menu-popover sidebarMenu-popover hideSidebarMenu" id="label-sidebarPopover">
                         <form class="popover-message shadow-lg" method="post" action="?setLabel">
-                            <?php foreach($labels as $label) { ?>
-                            <div class="menu-item d-flex" onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
-                                <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>" <?php if(in_array($label['labelid'], $currentLabels)) {echo 'checked';} ?> onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
-                                <div>
-                                    <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
-                                    <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                            <?php if ($labels_average > 0) {
+                            foreach($labels as $label) { ?>
+                                <div class="menu-item d-flex" onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
+                                    <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>" <?php if(in_array($label['labelid'], $currentLabels)) {echo 'checked';} ?> onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
+                                    <div>
+                                        <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
+                                        <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php }} else { ?>
+                                <div class="menu-item d-flex">Du musst zuerst Labels anlegen.</div>
                             <?php } ?>
                             <div class="text-center menu-footer">
                                 <button type="submit" class="btn btn-sm btn-outline-success">Labels speichern</button>
@@ -186,27 +190,28 @@
                             </svg>
                             <span><?php echo $issues['author'] ?></span>
                         </a>
-                        <?php foreach ($comment_authors as $author) { ?>
-                            <a class="person-chip"  href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'?search=author:'.$issues['author'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Comment-Autor">
+                        <?php foreach ($comment_authors as $author) {
+                            if ($author['author'] != $issues['author']) { ?>
+                            <a class="person-chip"  href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'].'?search=author:'.$author['author'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Comment-Autor">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                     <path fill-rule="evenodd" d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.005 6.005 0 00-3.432-5.142z"></path>
                                 </svg>
                                 <span><?php echo $author['author'] ?></span>
                             </a>
-                        <?php } ?>
+                        <?php }} ?>
                     </div>
                 </div>
             </div>
 
-            <?php if (($_SESSION['role'] == 'admin' OR $_SESSION['role'] == 'manager')) { ?>
-            <div class="sidebar-item">
-                <button class="btn btn-link text-small" id="deleteIssue" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                        <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
-                    </svg>
-                    Issue löschen
-                </button>
-            </div>
+            <?php if ($_SESSION['role'] == 'admin' OR $_SESSION['role'] == 'manager' OR $_SESSION['username'] == $info['owner']) { ?>
+                <div class="sidebar-item">
+                    <button class="btn btn-link text-small" id="deleteIssue" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                            <path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path>
+                        </svg>
+                        Issue löschen
+                    </button>
+                </div>
             <?php } ?>
         </div>
     </div>
