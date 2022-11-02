@@ -77,9 +77,11 @@
                 <input type="text" name="search" id="searchbox" class="form-control form-control-sm" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];}?>" autocomplete="off" placeholder="Alle Labels durchsuchen" onkeyup="Search(event)">
             </div>
         </div>
-        <div class="col-md-4 search-nav text-end">
-            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#wrapper-new" role="button" aria-expanded="false" aria-controls="wrapper-new" onclick="randomBtnColor('New')">Neues Label</button>
-        </div>
+        <?php if (isset($_SESSION['username'])) { ?>
+            <div class="col-md-4 search-nav text-end">
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="collapse" href="#wrapper-new" role="button" aria-expanded="false" aria-controls="wrapper-new" onclick="randomBtnColor('New')">Neues Label</button>
+            </div>
+        <?php } ?>
     </div>
 
     <div class="collapse my-3" id="wrapper-new">

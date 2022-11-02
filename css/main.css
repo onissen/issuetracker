@@ -228,6 +228,23 @@ svg {
   font-weight: 600;
 }
 
+.result-banner {
+  margin-top: 3rem;
+  text-align: center;
+  border: 1px solid #d0d7de;
+  border-color: rgba(84, 174, 255, 0.4);
+  background-color: #ddf4ff;
+  border-radius: 6px;
+  padding: 1rem;
+}
+.result-banner h3 {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+.result-banner p {
+  margin-bottom: 0.5rem;
+}
+
 .searchbar .querybox {
   padding: 0;
 }
@@ -566,6 +583,9 @@ svg {
   background-color: #6e7781;
   color: white;
 }
+.discussion-card .card-footer #deleteActionBtn {
+  cursor: pointer;
+}
 
 .toggleCommentMenu {
   cursor: pointer;
@@ -730,6 +750,41 @@ svg {
 
 #input-wrapper-newChannel {
   display: none;
+}
+
+.login-body {
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+  height: 100%;
+}
+
+#signin-main {
+  padding: 15px;
+  max-width: 340px;
+}
+#signin-main .h2 {
+  font-weight: 300;
+}
+
+#login-form {
+  background-color: #F6F8FA;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  padding: 16px;
+}
+#login-form .form-group {
+  text-align: left;
+}
+#login-form .form-group .form-label {
+  font-weight: 400;
+}
+
+#backtoapp {
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
 }
 
 .btn-gh {

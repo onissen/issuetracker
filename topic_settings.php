@@ -143,8 +143,8 @@
                             <span>Dieses Thema ist im Moment</span>
                             <span>
                                 <?php 
-                                    if ($info['visibility'] == 'public') {echo '<b>öffentlich</b> sichtbar';}
-                                    else if ($info['visibility'] == 'authenticated') {echo '<b>nur für angemeldete Benutzer</b> sichtbar';}
+                                    if ($info['visibility'] == 'public' OR $info['visibility'] == 'public-archive') {echo '<b>öffentlich</b> sichtbar';}
+                                    else if ($info['visibility'] == 'authenticated' OR $info['visibility'] == 'authenticated-archive') {echo '<b>nur intern</b> sichtbar';}
                                     else {echo 'mit dem Sichtbarkeitsstatus '.'<b>'.$info['visibility'].'</b>'.' sichtbar.';}
                                 ?>
                             </span>
@@ -164,18 +164,26 @@
                                             <span>
                                                 Aktuell:
                                                 <?php   
-                                                    if ($info['visibility'] == 'public') {echo 'Öffentlich';
-                                                    } elseif ($info['visibility'] == 'authenticated') {echo 'Angemeldete Benutzer';
+                                                    if ($info['visibility'] == 'public' OR $info['visibility'] == 'public-archive') {echo 'Öffentlich';
+                                                    } elseif ($info['visibility'] == 'authenticated' OR $info['visibility'] == 'authenticated-archive') {echo 'Nur Intern';
                                                     } else {echo $info['visibility'];}
                                                 ?>
                                             </span>
                                             <div class="form-check">
                                                 <input id="radioPublic" value="public" <?php if($info['visibility'] == 'public') {echo 'checked';} ?> type="radio" name="visibility" class="form-check-input">
-                                                <label for="radioPublic" class="form-check-label">Öffentlich</label>
+                                                <label for="radioPublic" class="form-check-label">Öffentliches Thema</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="radioPublicArchive" value="public-archive" <?php if($info['visibility'] == 'public-archive') {echo 'checked';} ?> type="radio" name="visibility" class="form-check-input">
+                                                <label for="radioPublicArchive" class="form-check-label">Öffentliches Archiv-Thema</label>
                                             </div>
                                             <div class="form-check">
                                                 <input id="radioAuthenticated" value="authenticated" <?php if($info['visibility'] == 'authenticated') {echo 'checked';} ?> type="radio" name="visibility" class="form-check-input">
-                                                <label for="radioAuthenticated" class="form-check-label">Angemeldete Nutzer</label>
+                                                <label for="radioAuthenticated" class="form-check-label">Internes Thema</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="radioAuthenticatedArchive" value="authenticated-archive" <?php if($info['visibility'] == 'authenticated-archive') {echo 'checked';} ?> type="radio" name="visibility" class="form-check-input">
+                                                <label for="radioAuthenticatedArchive" class="form-check-label">Internes Archiv-Thema</label>
                                             </div>
 
                                             <input type="hidden" name="id" value="<?php echo $info['tpid'] ?>">

@@ -1,4 +1,11 @@
 <?php require 'config.php' ?>
+<?php
+    if (isset($_GET['loggedout'])) {
+        session_unset();
+        session_destroy();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -24,6 +31,15 @@
                         <a class="nav-link" aria-current="page" href="<?php echo $SiteURL ?>">Themenübersicht</a>
                     </li>
                 </ul>
+                <div class="text-end me-5">
+                    <?php if (isset($_SESSION['username'])) { ?>
+                        <a href="<?php echo $SiteURL.'?loggedout' ?>" class="btn btn-outline-light" role="button" data-bs-toggle="tooltip" data-bs-title="Eingeloggt als <?php echo $_SESSION['username'] ?>">
+                            Logout
+                        </a>
+                    <?php } else { ?>
+                        <a href="<?php echo $SiteURL.'login' ?>" class="btn btn-outline-light" role="button">Login</a>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </nav>
