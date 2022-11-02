@@ -187,6 +187,7 @@
                 </div>
             </div>
 
+            <?php if ($_SESSION['role'] == 'admin' OR $_SESSION['role'] = 'manager') { ?>
             <div class="sidebar-item">
                 <button class="btn btn-link text-small" id="deleteIssue" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -195,6 +196,7 @@
                     Issue löschen
                 </button>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>
