@@ -94,7 +94,15 @@
                             </svg>
                             <?php echo $topic['channel'].'/'.$topic['topic'] ?>
                         </a>
-                        <span class="badge rounded-pill label-muted-outline"><?php echo $topic['visibility'] ?></span>
+                        <span class="badge rounded-pill label-muted-outline">
+                            <?php
+                                if ($topic['visibility'] == 'public') {echo 'Öffentliches Thema';}
+                                elseif ($topic['visibility'] == 'public-archive') {echo 'Öffentliches Archiv-Thema';}
+                                elseif ($topic['visibility'] == 'authenticated') {echo 'Internes Thema';}
+                                elseif ($topic['visibility'] == 'authenticated-archive') {echo 'Internes Archiv-Thema';}
+                                else {echo $topic['visibility'];}
+                            ?>    
+                        </span>
                     </h3>
                 </div>
                 <div class="clearfix"></div>
