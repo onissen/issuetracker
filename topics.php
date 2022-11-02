@@ -55,7 +55,7 @@
             </ul>
         </div>
         <div class="d-md-flex flex-md-items-center flex-md-justify-end">
-            <?php if(isset($_SESSION['role']) AND ($_SESSION['role'] == 'manager' OR $_SESSION['role'] == 'admin')) { ?>
+            <?php if(isset($_SESSION['role'])) { ?>
                 <a href="<?php echo $SiteURL ?>newTopic" class="btn btn-primary ms-3">
                     Neues Thema
                 </a>

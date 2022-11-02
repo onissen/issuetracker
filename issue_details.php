@@ -12,6 +12,7 @@
     $coment_average = $db->query("SELECT COUNT(sql_id)-1 AS average FROM comments WHERE issue_id = $sql_id; ")->fetchColumn();
     $comments = $db->query("SELECT * FROM comments WHERE issue_id = $sql_id ORDER BY date, issue_id")->fetchAll();
     $labels = $db->query("SELECT * FROM labels WHERE topicid = $topicid ORDER BY labelid")->fetchAll();
+    $labels_average = count($labels);
 
     $currentLabels = explode('..', $issues['label']);
     $sql_authors = "SELECT author FROM comments WHERE issue_id = $sql_id GROUP BY author";
@@ -147,14 +148,17 @@
                     </div>
                     <div class="menu-popover sidebarMenu-popover hideSidebarMenu" id="label-sidebarPopover">
                         <form class="popover-message shadow-lg" method="post" action="?setLabel">
-                            <?php foreach($labels as $label) { ?>
-                            <div class="menu-item d-flex" onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
-                                <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>" <?php if(in_array($label['labelid'], $currentLabels)) {echo 'checked';} ?> onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
-                                <div>
-                                    <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
-                                    <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                            <?php if ($labels_average > 0) {
+                            foreach($labels as $label) { ?>
+                                <div class="menu-item d-flex" onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
+                                    <input type="checkbox" name="label<?php echo $label['labelid'] ?>" value="<?php echo $label['labelid'] ?>" class="form-check-input" id="label<?php echo $label['labelid'] ?>" <?php if(in_array($label['labelid'], $currentLabels)) {echo 'checked';} ?> onclick="toggleCheck(<?php echo $label['labelid'] ?>)">
+                                    <div>
+                                        <span class="badge label-badge rounded-pill" style="background-color: <?php echo $label['color'] ?>"><?php echo $label['name'] ?></span><br>
+                                        <span class="text-muted text-small"><?php echo $label['description'] ?></span>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php }} else { ?>
+                                <div class="menu-item d-flex">Du musst zuerst Labels anlegen.</div>
                             <?php } ?>
                             <div class="text-center menu-footer">
                                 <button type="submit" class="btn btn-sm btn-outline-success">Labels speichern</button>
