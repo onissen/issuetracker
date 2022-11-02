@@ -21,7 +21,15 @@
                 <li class="breadcrumb-item"><a href="<?php echo $SiteURL.$info['channel'] ?>"><?php echo $info['channel'] ?></a></li>
                 <li class="breadcrumb-item active" area-current="page"><a href="<?php echo $SiteURL.$info['channel'].'/'.$info['topic'] ?>"><?php echo $info['topic'] ?></a></li>
             </ol>
-            <span class="badge rounded-pill label-muted-outline"><?php echo $info['visibility'] ?></span>
+            <span class="badge rounded-pill label-muted-outline">
+                <?php
+                    if ($info['visibility'] == 'public') {echo 'Öffentliches Thema';}
+                    elseif ($info['visibility'] == 'public-archive') {echo 'Öffentliches Archiv-Thema';}
+                    elseif ($info['visibility'] == 'authenticated') {echo 'Internes Thema';}
+                    elseif ($info['visibility'] == 'authenticated-archive') {echo 'Internes Archiv-Thema';}
+                    else {echo $info['visibility'];}
+                ?>    
+            </span>
         </div>
         <div class="clearfix"></div>
         <nav class="topic-nav px-3 px-md-4 px-lg-5">

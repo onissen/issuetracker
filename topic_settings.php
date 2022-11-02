@@ -143,8 +143,8 @@
                             <span>Dieses Thema ist im Moment</span>
                             <span>
                                 <?php 
-                                    if ($info['visibility'] == 'public') {echo '<b>öffentlich</b> sichtbar';}
-                                    else if ($info['visibility'] == 'authenticated') {echo '<b>nur für angemeldete Benutzer</b> sichtbar';}
+                                    if ($info['visibility'] == 'public' OR $info['visibility'] == 'public-archive') {echo '<b>öffentlich</b> sichtbar';}
+                                    else if ($info['visibility'] == 'authenticated' OR $info['visibility'] == 'authenticated-archive') {echo '<b>nur intern</b> sichtbar';}
                                     else {echo 'mit dem Sichtbarkeitsstatus '.'<b>'.$info['visibility'].'</b>'.' sichtbar.';}
                                 ?>
                             </span>
@@ -164,8 +164,8 @@
                                             <span>
                                                 Aktuell:
                                                 <?php   
-                                                    if ($info['visibility'] == 'public') {echo 'Öffentlich';
-                                                    } elseif ($info['visibility'] == 'authenticated') {echo 'Angemeldete Benutzer';
+                                                    if ($info['visibility'] == 'public' OR $info['visibility'] == 'public-archive') {echo 'Öffentlich';
+                                                    } elseif ($info['visibility'] == 'authenticated' OR $info['visibility'] == 'authenticated-archive') {echo 'Nur Intern';
                                                     } else {echo $info['visibility'];}
                                                 ?>
                                             </span>
