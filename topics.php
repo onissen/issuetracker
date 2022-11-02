@@ -55,14 +55,16 @@
             </ul>
         </div>
         <div class="d-md-flex flex-md-items-center flex-md-justify-end">
-            <a href="<?php echo $SiteURL ?>newTopic" class="btn btn-primary ms-3">
-                Neues Thema
-            </a>
-            <!-- Wird ggf nichtmehr hier verlinkt
-                 FIXME: If Higher Authenticated or Admin #33
-            <a href="<?php echo $SiteURL ?>newChannel" class="btn btn-primary ms-1">
-                Neuer Channel
-            </a> -->
+            <?php if(isset($_SESSION['role']) AND ($_SESSION['role'] == 'manager' OR $_SESSION['role'] == 'admin')) { ?>
+                <a href="<?php echo $SiteURL ?>newTopic" class="btn btn-primary ms-3">
+                    Neues Thema
+                </a>
+            <?php } else { ?>
+                <a tabindex="0" class="btn btn-primary" role="button" data-bs-toggle="popover" data-bs-trigger="focus" 
+                data-bs-content="Bitte melde dich an, um ein neues Thema anzulegen.">
+                    Neues Thema
+                </a>
+            <?php } ?>
         </div>
     </div>
 
