@@ -125,6 +125,7 @@
                     <div class="topic-description">
                         <p><?php echo $topic['description'] ?></p>
                     </div>
+                    <div id="topic-author" class="text-small text-muted">von <?php echo $topic['owner'] ?></div>
                 </div>
             <?php } ?>
         </div>

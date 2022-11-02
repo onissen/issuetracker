@@ -74,7 +74,7 @@
                     <b><?php echo $comment['author'] ?></b> <span>schrieb am <?php echo $comment['date'] ?></span>
                 </div>
                 <?php if (isset($_SESSION['username'])) {
-                    if ($_SESSION['role'] == 'admin' OR $comment['author'] == $_SESSION['username'] OR $issues['author'] == $_SESSION['username']) { ?>
+                    if ($_SESSION['role'] == 'admin' OR $comment['author'] == $_SESSION['username'] OR $info['owner'] == $_SESSION['username']) { ?>
                         <div class="actions col-1 text-end">
                             <div class="position-relative flex-1">
                                 <a class="toggleBtn toggleCommentMenu" id="toggleCommentMenu<?php echo $comment['sql_id'] ?>" onclick="toggleCommentMenu(<?php echo $comment['sql_id'] ?>)">
