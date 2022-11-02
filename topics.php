@@ -36,6 +36,8 @@
 <div class="container-lg container-md mt-5">
     <h2>Themenübersicht</h2>
 
+    <?php echo $db->errorCode(); ?>
+
     <div class="topic-filter d-flex flex-row align-items-start">
         <div class="flex-grow-1 me-2">
             <input type="text" name="search" id="searchbox" class="form-control" value="<?php if (isset($_REQUEST['search'])) {echo $_REQUEST['search'];} ?>" autocomplete="off" onkeyup="Search(event)" placeholder="Finde ein Thema">
