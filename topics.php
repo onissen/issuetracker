@@ -13,13 +13,13 @@
 
     } elseif (isset($_REQUEST['type']) AND !isset($_REQUEST['search']) ) {
         $type = $_REQUEST['type'];
-        $sql .= "WHERE (visibility LIKE '%$type%')";
+        $sql .= "WHERE (visibility LIKE '$type')";
 
     } elseif (isset($_REQUEST['search']) AND isset($_REQUEST['type']) ) {
         $search = $_REQUEST['search'];
         $type = $_REQUEST['type'];
         $sql .= "WHERE (topic LIKE '%$search%' OR description LIKE '%$search%' OR channel LIKE '%$search%')";
-        $sql .= "AND (visibility LIKE '%$type%')";
+        $sql .= "AND (visibility LIKE '$type')";
 
     } else {
         // TODO: If authenticated show, else nur public #39
@@ -41,7 +41,9 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a href="?type=public" class="dropdown-item">Öffentliche Themen</a></li>
+                <li><a href="?type=public-archive" class="dropdown-item">Öffentliche Archiv-Themen</a></li>
                 <li><a href="?type=authenticated" class="dropdown-item">Interne Themen</a></li>
+                <li><a href="?type=authenticated-archive" class="dropdown-item">Interne Archive-Themen</a></li>
                 <!-- TODO: und weitere #39  -->
             </ul>
         </div>
