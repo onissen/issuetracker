@@ -70,11 +70,11 @@
             <h5>Sichtbarkeit</h5>
             <div class="form-check">
                 <input id="radioPublic" value="public" type="radio" name="visibility" class="form-check-input" checked>
-                <label for="radioPublic" class="form-check-label">Öffentlich</label>
+                <label for="radioPublic" class="form-check-label">Öffentliches Thema</label>
             </div>
             <div class="form-check">
                 <input id="radioAuthenticated" value="authenticated" type="radio" name="visibility" class="form-check-input">
-                <label for="radioAuthenticated" class="form-check-label">Angemeldete Nutzer</label>
+                <label for="radioAuthenticated" class="form-check-label">Internes Thema</label>
             </div>
             <!-- TODO: ggf weitere Stati und Beschreibungen, Symbole... hinzufügen #39 -->
         </div>
